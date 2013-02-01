@@ -1,0 +1,19 @@
+{
+	"main": "index.html",
+	"name": "NW Desktop Notifications Demo",
+	"description": "A demo of desktop notifications",
+	"version": "0.1",
+	"keywords": [ "node-webkit", "Desktop Notifications" ],
+	"window": {
+		"toolbar": false,
+		"width": 640,
+		"height": 480,
+		"position": "mouse",
+		"min_width": 400,
+		"min_height": 200
+	},
+	"webkit": {
+		"plugin": true, //turns off browser plugins
+		"page-cache": false
+	}
+}
