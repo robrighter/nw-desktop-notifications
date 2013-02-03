@@ -5,6 +5,10 @@
 	var counter = 0;
 	if(requireNode){
 		gui = requireNode('nw.gui');
+    var mainwin = gui.Window.get();
+    mainwin.on("close", function() {
+      gui.App.quit();
+    });
 	}
 
 	if(!window.LOCAL_NW){
