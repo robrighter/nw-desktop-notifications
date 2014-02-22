@@ -21,6 +21,7 @@
 			height: 0,
 			'always-on-top': true,
 			show: false,
+			show_in_taskbar: false,
 			resizable: false
 		});
 		window.LOCAL_NW.DesktopNotificationsWindow = win;
