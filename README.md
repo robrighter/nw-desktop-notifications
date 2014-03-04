@@ -28,7 +28,7 @@ By including nw-desktop-notifications.js and nw-desktop-notifications.html in yo
 
     npm start
 
-(This assumes you have GulpJS installed on your path)
+(This assumes you have node-webkit and GulpJS installed on your path)
 
 
 ##Update the Look-and-Feel
