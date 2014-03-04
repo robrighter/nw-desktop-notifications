@@ -16,17 +16,19 @@ By including nw-desktop-notifications.js and nw-desktop-notifications.html in yo
 
 (2) cd into the project
 
-(3) make the nw zip file
+(3) install dependencies
 
-	./make-nw
+    `npm install`
 
-(4) Run the nw application
+(4) make the nw zip file
 
-	nw desktop-notify.nw
+	`gulp`
 
-(This assumes you have nw aliased to node-webkit)
+(5) Run the nw application
 
-	alias nw='~/Applications/node-webkit.app/Contents/MacOS/node-webkit'
+	`npm start`
+
+(This assumes you have GulpJS installed on your path)
 
 
 ##Update the Look-and-Feel
