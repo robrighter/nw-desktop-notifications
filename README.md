@@ -18,15 +18,15 @@ By including nw-desktop-notifications.js and nw-desktop-notifications.html in yo
 
 (3) install dependencies
 
-    `npm install`
+    npm install
 
 (4) make the nw zip file
 
-	`gulp`
+    gulp
 
 (5) Run the nw application
 
-	`npm start`
+    npm start
 
 (This assumes you have GulpJS installed on your path)
 
