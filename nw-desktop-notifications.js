@@ -1,6 +1,7 @@
 (function(){
 	var requireNode = window.require;
 	var WINDOW_WIDTH = 290;
+	var WINDOW_HEIGHT = 200;
 	var gui = null;
 	var counter = 0;
 	if(requireNode){
@@ -18,7 +19,7 @@
 			frame: false,
 			toolbar: false,
 			width: WINDOW_WIDTH,
-			height: 0,
+			height: WINDOW_HEIGHT,
 			'always-on-top': true,
 			show: false,
 			resizable: false

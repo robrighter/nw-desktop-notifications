@@ -1,1 +1,4 @@
-desktop-notify.nw
+.idea
+*.iml
+node_modules
+*.nw
