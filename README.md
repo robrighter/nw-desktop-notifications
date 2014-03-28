@@ -39,3 +39,7 @@ A customized desktop notifications system for [node-webkit](https://github.com/r
 ### Text
 
 ![Text Notification](http://i.imgur.com/zibFWHf.png)
+
+### Image
+
+![Image Notification](http://i.imgur.com/d8lJOy7.png)
