@@ -33,14 +33,16 @@
 		});
 	}
 
-	function closeAnyOpenNotificationWindows(){
+	function closeOpenNotifications(){
 		if(!gui){
 			return false;
 		}
-		if(window.DEA.DesktopNotificationsWindow){
+		if (window.DEA.DesktopNotificationsWindow){
 			window.DEA.DesktopNotificationsWindow.close(true);
 			window.DEA.DesktopNotificationsWindow = null;
+            return true;
 		}
+        return false;
 	}
 
 	function create(icon, title, content, onClick){
@@ -64,6 +66,15 @@
 		return true;
 	}
 
+    /**
+     * Need to create three different template types
+     *
+     * @param iconUrl
+     * @param title
+     * @param content
+     * @param id
+     * @returns {string}
+     */
 	function makeNotificationMarkup(iconUrl, title, content, id){
 		return "<li id='"+id+"'>"+
 			"<div class='icon'>" +
@@ -150,7 +161,7 @@
 
 	window.DEA.notifications = {
         create: create,
-		closeAnyOpenNotificationWindows: closeAnyOpenNotificationWindows
+		closeOpenNotifications: closeOpenNotifications
 	};
 
 })();

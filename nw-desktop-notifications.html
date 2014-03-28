@@ -29,7 +29,7 @@
 				width: 290px;
 				-webkit-app-region: no-drag;
 			}
-			#notifications li {
+			#notifications section {
 				overflow: hidden;
 				margin: 0px;
 				display: none;
@@ -72,17 +72,17 @@
 	</head>
 	<body style="-webkit-app-region: no-drag;">
 		<div id="closer">X</div>
-		<ul id='notifications'>
-		</ul>
+		<div id='notifications'>
+		</div>
 		<div id='shouldstart'>false</div>
         <script src="app/bower_components/jquery/dist/jquery.js"></script>
 		<script type="text/javascript">
 			var LIMIT_FOR_TRUNKATING_MESSAGES = 5;
 			function processNotifications(){
 				var nlist = $('#notifications');
-				var n = $('#notifications > li');
+				var n = $('#notifications > section');
 				var continuation = function(){
-					n = $('#notifications > li');
+					n = $('#notifications > section');
 					if(n.length === 0){
 						//lets close the window
 						$('#closer').click();
@@ -91,16 +91,16 @@
 						return;
 					}
 					else if(n.length > LIMIT_FOR_TRUNKATING_MESSAGES){
-						var toinsert = "<li>"+
+						var toinsert = "<section>"+
 							"<div class='icon'>" +
 								"<img src='desktop-notify.png' />" +
 							"</div>" +
 							"<div class='title'>Application Name Here</div>" +
 							"<div class='description'>"+n.length+" new cards.</div>" +
-							"</li>";
+							"</section>";
 						nlist.html(toinsert);
 					}
-					n = $('#notifications > li');
+					n = $('#notifications > section');
 					n.first().fadeIn('fast');
 					setTimeout(processNotifications, 4000);
 				}
