@@ -33,3 +33,9 @@ A customized desktop notifications system for [node-webkit](https://github.com/r
 3. `nw-desktop-notifications.js` created the notification and appends the template to the created notification window.
 
 4. `dea-notifications.html` is simply the container for the content. It handles closing itself and sending off interaction events back to the parent who initiated the notification.
+
+## Notification Types
+
+### Text
+
+![Text Notification](http://i.imgur.com/zibFWHf.png)
