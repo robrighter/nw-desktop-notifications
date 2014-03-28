@@ -2,14 +2,13 @@
 <html>
 	<head>
 		<title>Desktop Notification</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 		<style type="text/css">
 			body {
 				font-family : Helvetica, Arial, sans-serif;
 				background-color: #31322E;
 				color: #C9D1D5;
-				margin: none;
-				padding: none;
+				margin: 0;
+				padding: 0;
 				overflow: hidden;
 				-webkit-app-region: no-drag;
 				-webkit-touch-callout: none;
@@ -76,6 +75,7 @@
 		<ul id='notifications'>
 		</ul>
 		<div id='shouldstart'>false</div>
+        <script src="app/bower_components/jquery/dist/jquery.js"></script>
 		<script type="text/javascript">
 			var LIMIT_FOR_TRUNKATING_MESSAGES = 5;
 			function processNotifications(){

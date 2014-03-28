@@ -1,14 +1,14 @@
-##NW Desktop Notifications
+## Customized Desktop Notifications -
 
-A simple system for creating desktop notifications for [node-webkit](https://github.com/rogerwang/node-webkit) applications.
+A customized desktop notifications system for [node-webkit](https://github.com/rogerwang/node-webkit) applications.
 
+## Getting Started
 
-##Usage
+1. Include the javascript `nw-desktop-notifications.js` in your application
 
-By including nw-desktop-notifications.js and nw-desktop-notifications.html in your project you can create desktop notifications for your application by calling:
+2. Include the HTML template `dea-notifications.html` in your application
 
-	window.LOCAL_NW.desktopNotifications.notify(iconUrl, title, content, clickHandlerCallback);
-
+3. Create a notification using the API: `DEA.notifications.create(id, options, callback);`
 
 ##Running the demo
 
@@ -16,19 +16,20 @@ By including nw-desktop-notifications.js and nw-desktop-notifications.html in yo
 
 (2) cd into the project
 
-(3) make the nw zip file
+(3) Make the nw zip file by running the bash script
 
-	./make-nw
+	./make-nw.sh
 
 (4) Run the nw application
 
-	nw desktop-notify.nw
+	node-webkit desktop-notify.nw
 
-(This assumes you have nw aliased to node-webkit)
+## Application Flow
 
-	alias nw='~/Applications/node-webkit.app/Contents/MacOS/node-webkit'
+1. Call the API to create a new notification.
 
+2. `nw-desktop-notifications.js` creates the HTML template using the user provided content
 
-##Update the Look-and-Feel
+3. `nw-desktop-notifications.js` created the notification and appends the template to the created notification window.
 
-You can update the look and feel of the desktop notifications by updating the css embedded (via style tag) in nw-desktop-notifications.html.
+4. `dea-notifications.html` is simply the container for the content. It handles closing itself and sending off interaction events back to the parent who initiated the notification.

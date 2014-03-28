@@ -5,7 +5,7 @@
 	"version": "0.1",
 	"keywords": [ "node-webkit", "Desktop Notifications" ],
 	"window": {
-		"toolbar": false,
+		"toolbar": true,
 		"width": 640,
 		"height": 480,
 		"position": "mouse",
