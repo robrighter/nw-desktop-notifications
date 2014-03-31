@@ -1,52 +1,61 @@
 <html>
 	<head>
 		<title>Desktop Notification Demo</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<script src="app/bower_components/jquery/dist/jquery.js"></script>
 		<script src="nw-desktop-notifications.js"></script>
-	</head>
-	<style type="text/css">
-			body {
-				font-family : Helvetica, Arial, sans-serif;
-				background-color: #ccc;
-				color: #333;
-				margin: none;
-				padding: 30px;
-			}
-			input[type=text] {
-				width: 450px;
-				border-radius: 3px;
-				height: 25px;
-				border: 1px solid #999;
-				padding: 4px;
-				font-size: 12px;
-			}
+        <style type="text/css">
+            body {
+                font-family : Helvetica, Arial, sans-serif;
+                background-color: #ccc;
+                color: #333;
+                margin: 0;
+                padding: 30px;
+            }
+            input[type=text] {
+                width: 450px;
+                border-radius: 3px;
+                height: 25px;
+                border: 1px solid #999;
+                padding: 4px;
+                font-size: 12px;
+            }
 
-			#status {
-				border: 1px solid #84C03A;
-				background-color: #D1FCB3;
-				border-radius: 3px;
-				padding: 4px;
-				color: #84C03A;
-				font-size: 12px;
-			}
-			
-		</style>
+            #status {
+                border: 1px solid #84C03A;
+                background-color: #D1FCB3;
+                border-radius: 3px;
+                padding: 4px;
+                color: #84C03A;
+                font-size: 12px;
+            }
+
+        </style>
+	</head>
 	<body>
-	<h1>Desktop Notifications Demo</h1>
+	<h1>Notifications Demo</h1>
+    <hr>
 	<form id='nwdemo' action='#' method='post'>
+        <p>
+            Type of Notification:
+            <input type="radio" id="text" name="notificationType" checked value="text"/>
+            <label for="text">Text</label>
+
+            <input type="radio" id="image" name="notificationType" value="image"/>
+            <label for="image">Image</label>
+        </p>
 		<p>
-			<label>Title:</label><br />
-			<input name='title' type='text' value='Some Title'/>
+			<label for="title">Title:</label><br />
+			<input id="title" name='title' type='text' value='Some Title'/>
 		</p>
 		<p>
-			<label>Content:</label><br />
-			<input name='content' type='text' value='Testing of desktop notifications'/>
+			<label for="description">Content:</label><br />
+			<input id="description" name='content' type='text' value='Testing of desktop notifications'/>
 		</p>
 		<p>
-			<label>Icon Url:</label><br />
-			<input name='icon' type='text' value='desktop-notify.png'/>
+			<label for="iconUrl">Icon Url:</label><br />
+			<input id="iconUrl" name='icon' type='text' value='desktop-notify.png'/>
 		</p>
-		<input type='submit' value='Notify &raquo;'/>
+		<input type='submit' value='Create &raquo;'/>
 	</form>
 	<div id='status' style='display: none;'></div>
 	<script type="text/javascript">
