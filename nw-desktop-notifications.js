@@ -7,8 +7,8 @@
 		gui = requireNode('nw.gui');
 	}
 
-	if(!window.LOCAL_NW){
-		window.LOCAL_NW = {};
+	if(!window.DEA){
+		window.DEA = {};
 	}
 
 
@@ -23,10 +23,10 @@
 			show: false,
 			resizable: false
 		});
-		window.LOCAL_NW.DesktopNotificationsWindow = win;
-		window.LOCAL_NW.DesktopNotificationsWindowIsLoaded = false;
+		window.DEA.DesktopNotificationsWindow = win;
+		window.DEA.DesktopNotificationsWindowIsLoaded = false;
 		win.on('loaded', function(){
-			window.LOCAL_NW.DesktopNotificationsWindowIsLoaded = true;
+			window.DEA.DesktopNotificationsWindowIsLoaded = true;
 			$(win.window.document.body).find('#closer').click(function(){
 				slideOutNotificationWindow();
 			});
@@ -37,9 +37,9 @@
 		if(!gui){
 			return false;
 		}
-		if(window.LOCAL_NW.DesktopNotificationsWindow){
-			window.LOCAL_NW.DesktopNotificationsWindow.close(true);
-			window.LOCAL_NW.DesktopNotificationsWindow = null;
+		if(window.DEA.DesktopNotificationsWindow){
+			window.DEA.DesktopNotificationsWindow.close(true);
+			window.DEA.DesktopNotificationsWindow = null;
 		}
 	}
 
@@ -47,19 +47,19 @@
 		if(!gui){
 			return false;
 		}
-		if(!window.LOCAL_NW.DesktopNotificationsWindow){
+		if(!window.DEA.DesktopNotificationsWindow){
 			makeNewNotifyWindow();
 		}
 		var continuation = function(){
 			appendNotificationToWindow(icon, title, content, onClick);
 			slideInNotificationWindow();
-			$(window.LOCAL_NW.DesktopNotificationsWindow.window.document.body).find('#shouldstart').text('true');	
+			$(window.DEA.DesktopNotificationsWindow.window.document.body).find('#shouldstart').text('true');	
 		};
-		if(window.LOCAL_NW.DesktopNotificationsWindowIsLoaded){
+		if(window.DEA.DesktopNotificationsWindowIsLoaded){
 			continuation();
 		}
 		else{
-			window.LOCAL_NW.DesktopNotificationsWindow.on('loaded',continuation);	
+			window.DEA.DesktopNotificationsWindow.on('loaded',continuation);	
 		}
 		return true;
 	}
@@ -77,13 +77,13 @@
 	function appendNotificationToWindow(iconUrl, title, content, onClick){
 		var elemId = getUniqueId();
 		var markup = makeNotificationMarkup(iconUrl, title, content, elemId);
-		var jqBody = $(window.LOCAL_NW.DesktopNotificationsWindow.window.document.body);
+		var jqBody = $(window.DEA.DesktopNotificationsWindow.window.document.body);
 		jqBody.find('#notifications').append(markup);
 		jqBody.find('#'+elemId).click(onClick);
 	}
 
 	function slideInNotificationWindow(){
-		var win = window.LOCAL_NW.DesktopNotificationsWindow;
+		var win = window.DEA.DesktopNotificationsWindow;
 		if(win.NOTIFICATION_IS_SHOWING){
 			return;
 		}
@@ -108,7 +108,7 @@
 	}
 
 	function slideOutNotificationWindow(callback){
-		var win = window.LOCAL_NW.DesktopNotificationsWindow;
+		var win = window.DEA.DesktopNotificationsWindow;
 		var y = win.height;
 		var x = WINDOW_WIDTH;
 		function animate(){
@@ -148,7 +148,7 @@
 		}
 	}
 
-	window.LOCAL_NW.desktopNotifications = {
+	window.DEA.desktopNotifications = {
 		notify: notify,
 		closeAnyOpenNotificationWindows: closeAnyOpenNotificationWindows
 	};
