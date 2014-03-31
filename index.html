@@ -65,7 +65,7 @@
 			var icon = form.find('input[name=icon]').val();
 			var title = form.find('input[name=title]').val();
 			var content = form.find('input[name=content]').val();
-			window.LOCAL_NW.desktopNotifications.notify(icon, title, content, function(){
+			window.DEA.desktopNotifications.notify(icon, title, content, function(){
 				$('#status').text('Clicked on '+title);
 				$('#status').fadeIn('fast',function(){
 					setTimeout(function(){
