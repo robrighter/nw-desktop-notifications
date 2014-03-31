@@ -43,7 +43,7 @@
 		}
 	}
 
-	function notify(icon, title, content, onClick){
+	function create(icon, title, content, onClick){
 		if(!gui){
 			return false;
 		}
@@ -148,8 +148,8 @@
 		}
 	}
 
-	window.DEA.desktopNotifications = {
-		notify: notify,
+	window.DEA.notifications = {
+        create: create,
 		closeAnyOpenNotificationWindows: closeAnyOpenNotificationWindows
 	};
 
