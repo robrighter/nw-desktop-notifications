@@ -61,13 +61,30 @@
 	<script type="text/javascript">
 		$('#nwdemo').submit(function(e){
 			e.preventDefault();
-			var form = $(this);
-			var icon = form.find('input[name=icon]').val();
-			var title = form.find('input[name=title]').val();
-			var content = form.find('input[name=content]').val();
-			window.DEA.notifications.create(icon, title, content, function(){
-				$('#status').text('Clicked on '+title);
-				$('#status').fadeIn('fast',function(){
+			var form = $(this),
+                icon = form.find('input[name=icon]').val(),
+		        title = form.find('input[name=title]').val(),
+			    message = form.find('input[name=content]').val(),
+                notificationType = form.find('input[name=notificationType]:checked').val(),
+                $status = $('#status');
+
+            var opt = {
+                type: notificationType,
+                title: title,
+                message: message,
+                iconUrl: icon
+            };
+
+            /*
+             * Mapping of prior to DEA
+             *
+             * icon     -> opt.iconUrl
+             * title    -> opt.title
+             * content  -> opt.message
+             */
+			window.DEA.notifications.create(opt.iconUrl, opt.title, opt.message, function(){
+                $status.text('Clicked on '+title);
+                $status.fadeIn('fast',function(){
 					setTimeout(function(){
 						$('#status').fadeOut('fast');
 					},1800);
