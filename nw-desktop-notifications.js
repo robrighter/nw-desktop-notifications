@@ -7,8 +7,8 @@
 		gui = requireNode('nw.gui');
 	}
 
-	if(!window.DEA){
-		window.DEA = {};
+	if(!window.LOCAL_NW){
+		window.LOCAL_NW = {};
 	}
 
 
@@ -23,58 +23,47 @@
 			show: false,
 			resizable: false
 		});
-		window.DEA.DesktopNotificationsWindow = win;
-		window.DEA.DesktopNotificationsWindowIsLoaded = false;
+		window.LOCAL_NW.DesktopNotificationsWindow = win;
+		window.LOCAL_NW.DesktopNotificationsWindowIsLoaded = false;
 		win.on('loaded', function(){
-			window.DEA.DesktopNotificationsWindowIsLoaded = true;
+			window.LOCAL_NW.DesktopNotificationsWindowIsLoaded = true;
 			$(win.window.document.body).find('#closer').click(function(){
 				slideOutNotificationWindow();
 			});
 		});
 	}
 
-	function closeOpenNotifications(){
+	function closeAnyOpenNotificationWindows(){
 		if(!gui){
 			return false;
 		}
-		if (window.DEA.DesktopNotificationsWindow){
-			window.DEA.DesktopNotificationsWindow.close(true);
-			window.DEA.DesktopNotificationsWindow = null;
-            return true;
+		if(window.LOCAL_NW.DesktopNotificationsWindow){
+			window.LOCAL_NW.DesktopNotificationsWindow.close(true);
+			window.LOCAL_NW.DesktopNotificationsWindow = null;
 		}
-        return false;
 	}
 
-	function create(icon, title, content, onClick){
+	function notify(icon, title, content, onClick){
 		if(!gui){
 			return false;
 		}
-		if(!window.DEA.DesktopNotificationsWindow){
+		if(!window.LOCAL_NW.DesktopNotificationsWindow){
 			makeNewNotifyWindow();
 		}
 		var continuation = function(){
 			appendNotificationToWindow(icon, title, content, onClick);
 			slideInNotificationWindow();
-			$(window.DEA.DesktopNotificationsWindow.window.document.body).find('#shouldstart').text('true');
+			$(window.LOCAL_NW.DesktopNotificationsWindow.window.document.body).find('#shouldstart').text('true');	
 		};
-		if(window.DEA.DesktopNotificationsWindowIsLoaded){
+		if(window.LOCAL_NW.DesktopNotificationsWindowIsLoaded){
 			continuation();
 		}
 		else{
-			window.DEA.DesktopNotificationsWindow.on('loaded',continuation);
+			window.LOCAL_NW.DesktopNotificationsWindow.on('loaded',continuation);	
 		}
 		return true;
 	}
 
-    /**
-     * Need to create three different template types
-     *
-     * @param iconUrl
-     * @param title
-     * @param content
-     * @param id
-     * @returns {string}
-     */
 	function makeNotificationMarkup(iconUrl, title, content, id){
 		return "<li id='"+id+"'>"+
 			"<div class='icon'>" +
@@ -88,13 +77,13 @@
 	function appendNotificationToWindow(iconUrl, title, content, onClick){
 		var elemId = getUniqueId();
 		var markup = makeNotificationMarkup(iconUrl, title, content, elemId);
-		var jqBody = $(window.DEA.DesktopNotificationsWindow.window.document.body);
+		var jqBody = $(window.LOCAL_NW.DesktopNotificationsWindow.window.document.body);
 		jqBody.find('#notifications').append(markup);
 		jqBody.find('#'+elemId).click(onClick);
 	}
 
 	function slideInNotificationWindow(){
-		var win = window.DEA.DesktopNotificationsWindow;
+		var win = window.LOCAL_NW.DesktopNotificationsWindow;
 		if(win.NOTIFICATION_IS_SHOWING){
 			return;
 		}
@@ -119,7 +108,7 @@
 	}
 
 	function slideOutNotificationWindow(callback){
-		var win = window.DEA.DesktopNotificationsWindow;
+		var win = window.LOCAL_NW.DesktopNotificationsWindow;
 		var y = win.height;
 		var x = WINDOW_WIDTH;
 		function animate(){
@@ -159,9 +148,9 @@
 		}
 	}
 
-	window.DEA.notifications = {
-        create: create,
-		closeOpenNotifications: closeOpenNotifications
+	window.LOCAL_NW.desktopNotifications = {
+		notify: notify,
+		closeAnyOpenNotificationWindows: closeAnyOpenNotificationWindows
 	};
 
 })();

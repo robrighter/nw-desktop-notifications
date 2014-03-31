@@ -1,36 +1,36 @@
 <html>
 	<head>
 		<title>Desktop Notification Demo</title>
-        <script src="app/bower_components/jquery/dist/jquery.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 		<script src="nw-desktop-notifications.js"></script>
-        <style type="text/css">
-            body {
-                font-family : Helvetica, Arial, sans-serif;
-                background-color: #ccc;
-                color: #333;
-                margin: 0;
-                padding: 30px;
-            }
-            input[type=text] {
-                width: 450px;
-                border-radius: 3px;
-                height: 25px;
-                border: 1px solid #999;
-                padding: 4px;
-                font-size: 12px;
-            }
-
-            #status {
-                border: 1px solid #84C03A;
-                background-color: #D1FCB3;
-                border-radius: 3px;
-                padding: 4px;
-                color: #84C03A;
-                font-size: 12px;
-            }
-
-        </style>
 	</head>
+	<style type="text/css">
+			body {
+				font-family : Helvetica, Arial, sans-serif;
+				background-color: #ccc;
+				color: #333;
+				margin: none;
+				padding: 30px;
+			}
+			input[type=text] {
+				width: 450px;
+				border-radius: 3px;
+				height: 25px;
+				border: 1px solid #999;
+				padding: 4px;
+				font-size: 12px;
+			}
+
+			#status {
+				border: 1px solid #84C03A;
+				background-color: #D1FCB3;
+				border-radius: 3px;
+				padding: 4px;
+				color: #84C03A;
+				font-size: 12px;
+			}
+			
+		</style>
 	<body>
 	<h1>Desktop Notifications Demo</h1>
 	<form id='nwdemo' action='#' method='post'>
@@ -56,7 +56,7 @@
 			var icon = form.find('input[name=icon]').val();
 			var title = form.find('input[name=title]').val();
 			var content = form.find('input[name=content]').val();
-			DEA.notifications.create(icon, title, content, function(){
+			window.LOCAL_NW.desktopNotifications.notify(icon, title, content, function(){
 				$('#status').text('Clicked on '+title);
 				$('#status').fadeIn('fast',function(){
 					setTimeout(function(){
