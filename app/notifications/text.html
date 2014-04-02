@@ -2,76 +2,11 @@
 <html>
 <head>
     <title>Basic Text Notification</title>
-    <link rel="stylesheet" href="../bower_components/open-sans-fontface/open-sans-custom.css" type="text/css" />
+    <link rel="stylesheet" href="../bower_components/normalize-css/normalize.css"/>
+    <link rel="stylesheet" href="../bower_components/open-sans-fontface/open-sans-custom.css" type="text/css"/>
+    <link rel="stylesheet" href="dea-notifications-shared.css"/>
     <style type="text/css">
-        body {
-            font-family: 'Open Sans', sans-serif;
-        }
-        .container {
-            width: 350px;
-            min-height: 80px;
-            border: solid 1px #D8D8D8;
-        }
-        .icon {
-            width: 80px;
-            height: 80px;
-            float: left;
-            xborder: solid 1px #ccc;
-        }
-        .icon img {
-            width: 80px;
-            height: 80px;
-        }
-        .title, .description {
-            margin: 10px 30px 0 93px;
-            text-align: justify;
-        }
 
-        .title {
-            font-size: 15px;
-        }
-        .description {
-            font-size: 12px;
-            padding-bottom: 20px;
-        }
-
-        #closer {
-            border: 1px solid #fff;
-            border-radius: 50%;
-            color: #727272;
-            text-align: center;
-            float: right;
-            font-size: 10px;
-            width: 15px;
-            margin: 10px 3px 0 0;
-            -webkit-app-region: no-drag;
-        }
-
-        #closer:hover {
-            border: 1px solid #ccc;
-            cursor: pointer;
-            color: #fff;
-            background-color: #8F8F8F;
-        }
-
-        #closer:active {
-            background-color: #707070;
-        }
-
-        .button {
-            border-top: solid 1px #eeeeee;
-            font-size: 13px;
-            padding: 10px 0 10px 20px;
-        }
-
-        .button:hover {
-            background-color: #eeeeee;
-            cursor: pointer;
-        }
-
-        .button:active {
-            background-color: #cccccc;
-        }
 
     </style>
 </head>
@@ -79,15 +14,31 @@
 
 <div class="container">
     <div id="closer">X</div>
-    <div class="icon">
-        <img src="desktop-notify.png" alt="Notification Icon"/>
+    <div id="notifications">
+        <section>
+            <div class="icon">
+                <img src="nike-logo.jpg" alt="Notification Icon"/>
+            </div>
+            <div class="title">What is Lorem Ipsum?</div>
+            <div class="description">Lorem Ipsum is simply dummy text.</div>
+            <div class="button primary">Yes</div>
+            <div class="button secondary">No</div>
+        </section>
     </div>
-    <div class="title">What is Lorem Ipsum?</div>
-    <div class="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets c</div>
-    <div class="button primary">Yes</div>
-    <div class="button secondary">No</div>
 </div>
 
+<script id="text-notification" type="text/x-handlebars-template">
+    <section id="{{id}}">
+        <div class="icon">
+            <img src="{{iconUrl}}"/>
+        </div>
+        <div class="title">{{title}}</div>
+        <div class="description">{{message}}</div>
+        {{#each buttons}}
+            <div class="button">{{title}}</div>
+        {{/each}}
+    </section>
+</script>
 
 </body>
 </html>

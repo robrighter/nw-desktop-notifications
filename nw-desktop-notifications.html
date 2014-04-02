@@ -2,14 +2,12 @@
 <html>
 	<head>
 		<title>Desktop Notification</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<script src="app/bower_components/jquery/dist/jquery.js"></script>
 		<style type="text/css">
 			body {
 				font-family : Helvetica, Arial, sans-serif;
-				background-color: #31322E;
-				color: #C9D1D5;
-				margin: none;
-				padding: none;
+				margin: 0;
+				padding: 0;
 				overflow: hidden;
 				-webkit-app-region: no-drag;
 				-webkit-touch-callout: none;
@@ -30,59 +28,29 @@
 				width: 290px;
 				-webkit-app-region: no-drag;
 			}
-			#notifications li {
+			#notifications section {
 				overflow: hidden;
 				margin: 0px;
 				display: none;
 				cursor: pointer;
 			}
-			#notifications .icon img {
-				width: 30px;
-				float: left;
-			}
-			#notifications .title,
-			#notifications .description {
-				margin-left: 40px;
-				font-size: 12px;
-			}
-			#notifications .title {
-				font-weight: bold;
-				font-size: 13px;
-			}
 			#shouldstart {
 				display:none;
-			}
-
-			#closer {
-				border-radius: 3px;
-				text-align: center;
-				position: fixed;
-				right: 7px;
-				top: 4px;
-				font-size: 9px;
-				padding: 3px;
-				z-index: 10;
-				-webkit-app-region: no-drag;
-			}
-
-			#closer:hover {
-				border: 1px solid #ccc;
-				cursor: pointer;
 			}
 		</style>
 	</head>
 	<body style="-webkit-app-region: no-drag;">
 		<div id="closer">X</div>
-		<ul id='notifications'>
-		</ul>
+		<div id='notifications'>
+		</div>
 		<div id='shouldstart'>false</div>
 		<script type="text/javascript">
 			var LIMIT_FOR_TRUNKATING_MESSAGES = 5;
 			function processNotifications(){
 				var nlist = $('#notifications');
-				var n = $('#notifications > li');
+				var n = $('#notifications > section');
 				var continuation = function(){
-					n = $('#notifications > li');
+					n = $('#notifications > section');
 					if(n.length === 0){
 						//lets close the window
 						$('#closer').click();
@@ -91,16 +59,16 @@
 						return;
 					}
 					else if(n.length > LIMIT_FOR_TRUNKATING_MESSAGES){
-						var toinsert = "<li>"+
+						var toinsert = "<section>"+
 							"<div class='icon'>" +
 								"<img src='desktop-notify.png' />" +
 							"</div>" +
 							"<div class='title'>Application Name Here</div>" +
 							"<div class='description'>"+n.length+" new cards.</div>" +
-							"</li>";
+							"</section>";
 						nlist.html(toinsert);
 					}
-					n = $('#notifications > li');
+					n = $('#notifications > section');
 					n.first().fadeIn('fast');
 					setTimeout(processNotifications, 4000);
 				}

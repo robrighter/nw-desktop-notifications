@@ -1,3 +1,7 @@
+var html = (function () {/*
+
+ */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
+
 (function(){
 	var requireNode = window.require;
 	var WINDOW_WIDTH = 290;
@@ -43,7 +47,8 @@
 		}
 	}
 
-	function create(icon, title, content, onClick){
+    /* API called directly from apps */
+	function create(options, onClick){
 		if(!gui){
 			return false;
 		}
@@ -51,36 +56,66 @@
 			makeNewNotifyWindow();
 		}
 		var continuation = function(){
-			appendNotificationToWindow(icon, title, content, onClick);
+			appendNotificationToWindow(options, onClick);
 			slideInNotificationWindow();
-			$(window.DEA.DesktopNotificationsWindow.window.document.body).find('#shouldstart').text('true');	
+			$(window.DEA.DesktopNotificationsWindow.window.document.body).find('#shouldstart').text('true');
 		};
 		if(window.DEA.DesktopNotificationsWindowIsLoaded){
 			continuation();
 		}
 		else{
-			window.DEA.DesktopNotificationsWindow.on('loaded',continuation);	
+			window.DEA.DesktopNotificationsWindow.on('loaded',continuation);
 		}
 		return true;
 	}
 
-	function makeNotificationMarkup(iconUrl, title, content, id){
-		return "<li id='"+id+"'>"+
+    /**
+     * Notification template type
+     */
+
+	function makeNotificationMarkup(options, id){
+		return "<section id='"+id+"'>"+
 			"<div class='icon'>" +
-				"<img src='"+iconUrl+"' />" +
+				"<img src='"+options.iconUrl+"' />" +
 			"</div>" +
-			"<div class='title'>"+truncate(title, 35)+"</a></div>" +
-			"<div class='description'>"+truncate(content, 37)+"</div>" +
-			"</li>";
+			"<div class='title'>" + options.title +"</div>" +
+			"<div class='description'>" + options.message + "</div>" +
+			"</section>";
 	}
 
-	function appendNotificationToWindow(iconUrl, title, content, onClick){
+    function makeImageNotificationMarkup(options, id) {
+        return "<section id='"+id+"'>"+
+            "<div class='icon'>" +
+            "<img src='" + options.iconUrl + "' />" +
+            "</div>" +
+            "<div class='title'>" + options.title +"</div>" +
+            "<div class='description'>" + options.message + "</div>" +
+            "<div class='gallery'><img src=''" +  "</div>" +
+            "</section>";
+    }
+
+	function appendNotificationToWindow(options, onClick){
 		var elemId = getUniqueId();
-		var markup = makeNotificationMarkup(iconUrl, title, content, elemId);
+        var markup;
+        switch (options.type) {
+            case 'text':
+                markup = makeNotificationMarkup(options, elemId);
+                break;
+            case 'image':
+                markup = makeImageNotificationMarkup(options, elemId);
+                break;
+            default:
+                markup = makeNotificationMarkup(options, elemId);
+                break;
+        }
 		var jqBody = $(window.DEA.DesktopNotificationsWindow.window.document.body);
 		jqBody.find('#notifications').append(markup);
-		jqBody.find('#'+elemId).click(onClick);
+		jqBody.find('#'+elemId).click(onClick); //notification as a whole click, what about button clicks
 	}
+
+    /*
+     * Custom sliding IN animations here, slide right, slide left, slide up, slide down...
+     */
 
 	function slideInNotificationWindow(){
 		var win = window.DEA.DesktopNotificationsWindow;
@@ -106,6 +141,10 @@
 		}
 		animate();
 	}
+
+    /*
+     * Custom sliding OUT animations here, slide right, slide left, slide up, slide down...
+     */
 
 	function slideOutNotificationWindow(callback){
 		var win = window.DEA.DesktopNotificationsWindow;

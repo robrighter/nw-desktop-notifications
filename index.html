@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<title>Desktop Notification Demo</title>
+        <link rel="stylesheet" href="app/bower_components/normalize-css/normalize.css"/>
 		<script src="app/bower_components/jquery/dist/jquery.js"></script>
 		<script src="nw-desktop-notifications.js"></script>
         <style type="text/css">
@@ -68,7 +69,7 @@
                 notificationType = form.find('input[name=notificationType]:checked').val(),
                 $status = $('#status');
 
-            var opt = {
+            var options = {
                 type: notificationType,
                 title: title,
                 message: message,
@@ -82,11 +83,11 @@
              * title    -> opt.title
              * content  -> opt.message
              */
-			window.DEA.notifications.create(opt.iconUrl, opt.title, opt.message, function(){
-                $status.text('Clicked on '+title);
+			window.DEA.notifications.create(options, function(id){
+                $status.text('Clicked on ' + options.title);
                 $status.fadeIn('fast',function(){
 					setTimeout(function(){
-						$('#status').fadeOut('fast');
+						$('#status').fadeOut('slow');
 					},1800);
 				});
 			});
