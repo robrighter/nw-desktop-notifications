@@ -152,18 +152,27 @@
 		var jqBody = $(window.DEA.DesktopNotificationsWindow.window.document.body);
         var container = jqBody.find('.container');
 		jqBody.find('#notifications').html(markup).promise().done(function() {
-            console.log('html done appending, but is image done loading?');
-            var firstPhoto = container.find('.gallery img:first');
-            if (firstPhoto[0].complete) {
-                // Already loaded, call the handler directly
-                handler();
+
+            // html done loading, but we need to wait for image to be done loading
+            // http://stackoverflow.com/a/2833076/907388
+            if (options.notificationType == 'image') {
+                var photo = container.find('.gallery img:first');
+                if (photo[0].complete) {
+                    // Already loaded, call the handler directly
+                    handler();
+                }
+                else {
+                    // Not loaded yet, register the handler
+                    photo.load(handler);
+                }
+                function handler() {
+                    // image loaded
+                    window.DEA.height = container.outerHeight();
+                    window.DEA.width = container.outerWidth();
+                    dfd.resolve();
+                }
             }
             else {
-                // Not loaded yet, register the handler
-                firstPhoto.load(handler);
-            }
-            function handler() {
-                console.log('image loaded!');
                 window.DEA.height = container.outerHeight();
                 window.DEA.width = container.outerWidth();
                 dfd.resolve();
