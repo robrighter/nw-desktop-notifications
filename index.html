@@ -1,10 +1,7 @@
 <html>
 <head>
     <title>Desktop Notification Demo</title>
-    <link rel="stylesheet" href="app/bower_components/normalize-css/normalize.css"/>
-    <link rel="stylesheet" href="app/bower_components/flat-ui-official/css/flat-ui.css"/>
-    <script src="app/bower_components/jquery/dist/jquery.js"></script>
-    <script src="app/bower_components/flat-ui-official/js/flatui-radio.js"></script>
+    <script src="jquery.min.js"></script>
     <script src="nw-desktop-notifications.js"></script>
     <style type="text/css">
         body {
@@ -21,9 +18,44 @@
             margin: 0;
         }
 
-        input[type=text] {
+        input {
+            padding: 10px;
+            font-size: 15px;
+            color: #333;
+        }
+
+        input:focus {
+            outline: 2px solid #1ABC9C;
+        }
+
+        input[type=text], input[type=submit] {
             width: 450px;
         }
+
+        input[type=submit] {
+            font-size: 20px;
+            background-color: #1ABC9C;
+            color: white;
+            border: 0;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #48C9B0;
+        }
+
+        input[type=submit]:active {
+            background-color: #16A085;
+        }
+
+        input[type=submit]:focus {
+            outline: 0;
+            background-color: #48C9B0;
+        }
+
+        input, input:hover, input:focus, input:active {
+        }
+
 
         #status {
             border: 1px solid #84C03A;
@@ -41,7 +73,7 @@
 <hr>
 <form id='nwdemo' action='#' method='post' class="form-group">
     <p>
-        <label>Type:</label><br>
+        <label>Type:</label>
         <label for="text" class="radio">
             <input type="radio" id="text" name="notificationType" checked value="text"/>
             Text
@@ -55,32 +87,31 @@
 
     <p>
         <label for="title">Title:</label><br/>
-        <input id="title" name='title' type='text' value='Some Title' class="form-control"/>
+        <input id="title" name='title' type='text' value='Some Title'/>
     </p>
 
     <p>
         <label for="description">Message:</label><br/>
-        <input id="description" name='content' type='text' value='Testing of desktop notifications'
-               class="form-control"/>
+        <input id="description" name='content' type='text' value='Testing of desktop notifications'"/>
     </p>
 
     <p>
-        <label for="iconUrl">Icon Url (optional): </label> <br>
-        <input id="iconUrl" name='icon' type='text' value='desktop-notify.png' class="form-control"/>
+        <label for="iconUrl">Icon URL (optional): </label> <br>
+        <input id="iconUrl" name='icon' type='text' value='desktop-notify.png' />
     </p>
 
     <p>
         <label>Primary Button</label><br>
-        <input id="actionButtons" name='actionButtonPrimary' type='text' value='Yes' class="form-control"/>
+        <input name='actionButtonPrimary' type='text' value='Yes' />
     </p>
 
     <p>
         <label>Secondary Button</label><br>
-        <input id="actionButtons" name='actionButtonSecondary' type='text' value='' class="form-control"/>
+        <input name='actionButtonSecondary' type='text' value=''/>
     </p>
 
     <p>
-        <input class="btn btn-block btn-lg btn-primary" type='submit' value='Create Notification &raquo;'/>
+        <input id="submission" type='submit' value='Create Notification &raquo;'/>
     </p>
 </form>
 <div id='status' style='display: none;'></div>
@@ -130,7 +161,6 @@
             });
         });
     });
-    $(':radio').radio();
 </script>
 </body>
 </html>
