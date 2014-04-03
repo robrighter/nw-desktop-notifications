@@ -6,8 +6,8 @@
 	"keywords": [ "node-webkit", "Desktop Notifications" ],
 	"window": {
 		"toolbar": true,
-		"width": 640,
-		"height": 480,
+		"width": 520,
+		"height": 750,
 		"position": "mouse",
 		"min_width": 400,
 		"min_height": 200

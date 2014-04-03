@@ -43,3 +43,7 @@ A customized desktop notifications system for [node-webkit](https://github.com/r
 ### Image
 
 ![Image Notification](http://i.imgur.com/d8lJOy7.png)
+
+## Notification Demo Client
+
+![Demo Client](http://i.imgur.com/oMzEfF8.png)

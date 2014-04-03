@@ -29,14 +29,18 @@
 
 <script id="text-notification" type="text/x-handlebars-template">
     <section id="{{id}}">
-        <div class="icon">
-            <img src="{{iconUrl}}"/>
-        </div>
+        {{#if iconUrl}}
+            <div class="icon">
+                <img src="{{iconUrl}}"/>
+            </div>
+        {{/if}}
         <div class="title">{{title}}</div>
         <div class="description">{{message}}</div>
-        {{#each buttons}}
-            <div class="button">{{title}}</div>
-        {{/each}}
+        {{#if buttons}}
+            {{#each buttons}}
+                <div class="button">{{title}}</div>
+            {{/each}}
+        {{/if}}
     </section>
 </script>
 

@@ -171,15 +171,14 @@ module.exports = function(grunt) {
   this.registerTask('build', "Builds a distributable version of the current project", [
                     'parser',
                     'node',
-                    'globals',
-                    'jshint']);
+                    'globals']);
 
   this.registerTask('amd', ['packager:amd', 'requirejs']);
   this.registerTask('node', ['packager:cjs']);
   this.registerTask('globals', ['packager:global']);
   this.registerTask('tests', ['concat:tests']);
 
-  this.registerTask('release', 'Build final packages', ['amd', 'jshint', 'uglify', 'copy:dist', 'copy:components', 'copy:cdnjs']);
+  this.registerTask('release', 'Build final packages', ['amd', 'uglify', 'copy:dist', 'copy:components', 'copy:cdnjs']);
 
   // Load tasks from npm
   grunt.loadNpmTasks('grunt-contrib-clean');
