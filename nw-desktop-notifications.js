@@ -155,7 +155,7 @@
 
             // html done loading, but we need to wait for image to be done loading
             // http://stackoverflow.com/a/2833076/907388
-            if (options.notificationType == 'image') {
+            if (options.type == 'image') {
                 var photo = container.find('.gallery img:first');
                 if (photo[0].complete) {
                     // Already loaded, call the handler directly
