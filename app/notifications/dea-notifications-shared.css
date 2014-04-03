@@ -85,3 +85,28 @@ body {
 .button:active {
     background-color: #cccccc;
 }
+
+/* Image notification specific css */
+.gallery {
+    clear: both;
+    position: relative;
+}
+
+.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+.highlight {
+    background: rgb(0,0,0); /* The Fallback */
+    background-color: rgba(0,0,0,0.7);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.highlight .title {
+    color: #fff;
+    margin: 10px 10px 10px 15px;
+    line-height: 18px;
+}

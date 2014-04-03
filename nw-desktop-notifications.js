@@ -28,7 +28,7 @@
 			toolbar: true,
 			'always-on-top': true,
 			show: false,
-			resizable: false
+			resizable: true
 		});
 		window.DEA.DesktopNotificationsWindow = win;
 		window.DEA.DesktopNotificationsWindowIsLoaded = false;
@@ -59,8 +59,9 @@
 			makeNewNotifyWindow();
 		}
 		var continuation = function(){
-			appendNotificationToWindow(options, onClick);
-			slideInNotificationWindow();
+			appendNotificationToWindow(options, onClick).then(function() {
+                slideInNotificationWindow();
+            });
 			//$(window.DEA.DesktopNotificationsWindow.window.document.body).find('#shouldstart').text('true');
 		};
 		if(window.DEA.DesktopNotificationsWindowIsLoaded){
@@ -73,10 +74,12 @@
 	}
 
     /**
-     * Notification template type
+     * Notification template types
      */
 
 	function makeNotificationMarkup(options, id){
+        options.id = id;
+        // Template is here and as a multiline string for the sake of readability since we cannot have them in the HTML
         var templateSource = (function () {/*
              <section id="{{id}}">
              {{#if iconUrl}}
@@ -94,15 +97,44 @@
              </section>
          */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
         var compiledTemplate = Handlebars.compile(templateSource);
-        var html = compiledTemplate(options);
-        return html;
+        return compiledTemplate(options); //html string
 	}
 
     function makeImageNotificationMarkup(options, id) {
-        return '';
+        options.id = id;
+        // Template is here and as a multiline string for the sake of readability since we cannot have them in the HTML
+        var templateSource = (function () {/*
+             <section id="{{id}}">
+             {{#if iconUrl}}
+             <div class="icon">
+             <img src="{{iconUrl}}"/>
+             </div>
+             {{/if}}
+             <div class="title">{{title}}</div>
+             <div class="description">{{message}}</div>
+             <div class="gallery">
+             {{#if imageUrl}}
+             <img src="{{imageUrl}}"/>
+             {{/if}}
+             {{#if imageTitle}}
+             <div class="highlight">
+             <div class="title">{{imageTitle}}</div>
+             </div>
+             {{/if}}
+             </div>
+             {{#if buttons}}
+             {{#each buttons}}
+             <div class="button">{{title}}</div>
+             {{/each}}
+             {{/if}}
+             </section>
+         */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
+        var compiledTemplate = Handlebars.compile(templateSource);
+        return compiledTemplate(options); //html string
     }
 
-	function appendNotificationToWindow(options, onClick){
+	function appendNotificationToWindow(options, onClick) {
+        var dfd = $.Deferred();
 		var elemId = getUniqueId();
         console.log(elemId);
         var markup;
@@ -119,10 +151,29 @@
         }
 		var jqBody = $(window.DEA.DesktopNotificationsWindow.window.document.body);
         var container = jqBody.find('.container');
-		jqBody.find('#notifications').html(markup);
+		jqBody.find('#notifications').html(markup).promise().done(function() {
+            console.log('html done appending, but is image done loading?');
+            var firstPhoto = container.find('.gallery img:first');
+            if (firstPhoto[0].complete) {
+                // Already loaded, call the handler directly
+                handler();
+            }
+            else {
+                // Not loaded yet, register the handler
+                firstPhoto.load(handler);
+            }
+            function handler() {
+                console.log('image loaded!');
+                window.DEA.height = container.outerHeight();
+                window.DEA.width = container.outerWidth();
+                dfd.resolve();
+            }
+        });
+
+
+        // whats the poin in this?
 		jqBody.find('#'+elemId).click(onClick); //notification as a whole click, what about button clicks
-        window.DEA.height = container.outerHeight();
-        window.DEA.width = container.outerWidth();
+        return dfd.promise();
 	}
 
     /*
@@ -137,6 +188,7 @@
 		var y = screen.availTop;
 		var x = WINDOW_WIDTH;
 		win.moveTo(getXPositionOfNotificationWindow(win),y);
+        console.log(window.DEA.width, window.DEA.height);
         win.resizeTo(window.DEA.width, window.DEA.height)
         win.show();
 		win.NOTIFICATION_IS_SHOWING = true;

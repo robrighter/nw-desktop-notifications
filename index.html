@@ -1,7 +1,7 @@
 <html>
 <head>
     <title>Desktop Notification Demo</title>
-    <script src="jquery.min.js"></script>
+    <script src="app/bower_components/jquery/dist/jquery.js"></script>
     <script src="nw-desktop-notifications.js"></script>
     <style type="text/css">
         body {
@@ -26,6 +26,10 @@
 
         input:focus {
             outline: 2px solid #1ABC9C;
+        }
+
+        input[type=radio]:focus {
+            outline: 0;
         }
 
         input[type=text], input[type=submit] {
@@ -66,11 +70,15 @@
             font-size: 12px;
         }
 
+        #imageUrl, #imageTitle {
+            display: none;
+        }
+
     </style>
 </head>
 <body>
 <h1>Notifications Demo</h1>
-<hr>
+<hr/>
 <form id='nwdemo' action='#' method='post' class="form-group">
     <p>
         <label>Type:</label>
@@ -92,7 +100,7 @@
 
     <p>
         <label for="description">Message:</label><br/>
-        <input id="description" name='content' type='text' value='Testing of desktop notifications'"/>
+        <input id="description" name='content' type='text' value='Testing of desktop notifications'/>
     </p>
 
     <p>
@@ -110,13 +118,36 @@
         <input name='actionButtonSecondary' type='text' value=''/>
     </p>
 
-    <p>
+    <p id="submissionButton">
         <input id="submission" type='submit' value='Create Notification &raquo;'/>
     </p>
 </form>
 <div id='status' style='display: none;'></div>
+
 <script type="text/javascript">
-    $('#nwdemo').submit(function (e) {
+
+    var $demoForm =  $('#nwdemo');
+
+    // Toggle between image and text notifications
+    $demoForm.find('input[name=notificationType]').change(function() {
+        if (this.value == 'image') {
+            $('#submissionButton').prepend('<p id="imageUrl"><label>Image URL</label><br>' +
+            '<input name="imageUrl" type="text" value="nike.jpg"/></p>');
+
+            $('#submissionButton').prepend('<p id="imageTitle"><label>Image Title</label><br>' +
+                '<input name="imageTitle" type="text" value="2014 Nike Free 3.0 V4 Shoes"/></p>');
+
+            $('#imageUrl').fadeIn('fast');
+            $('#imageTitle').fadeIn('fast');
+        }
+        else {
+            $('#imageUrl').fadeOut('fast');
+            $('#imageTitle').fadeOut('fast');
+        }
+    });
+
+    $demoForm.submit(function (e) {
+
         e.preventDefault();
         var form = $(this),
             icon = form.find('input[name=icon]').val(),
@@ -125,6 +156,8 @@
             notificationType = form.find('input[name=notificationType]:checked').val(),
             primaryButton = form.find('input[name=actionButtonPrimary]').val(),
             secondaryButton = form.find('input[name=actionButtonSecondary]').val(),
+            imageUrl = form.find('input[name=imageUrl]').val(),
+            imageTitle = form.find('input[name=imageTitle]').val(),
             $status = $('#status');
 
         var options = {
@@ -134,6 +167,12 @@
             iconUrl: icon,
             buttons: []
         };
+
+        // Extend image notifications with a couple extra parameters
+        if (notificationType == 'image') {
+            options.imageUrl = imageUrl;
+            options.imageTitle = imageTitle;
+        }
 
         if (primaryButton) {
             options.buttons.push({'title': primaryButton});
@@ -153,6 +192,8 @@
          */
         window.DEA.notifications.create(options, function (id) {
             console.log('clicked ', id);
+
+            /* Different event listeners are going here */
             $status.text('Clicked on ' + options.title);
             $status.fadeIn('fast', function () {
                 setTimeout(function () {

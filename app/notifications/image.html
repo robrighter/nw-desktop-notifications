@@ -58,20 +58,28 @@
 
 <script id="image-notification" type="text/x-handlebars-template">
     <section id="{{id}}">
+        {{#if iconUrl}}
         <div class="icon">
             <img src="{{iconUrl}}"/>
         </div>
+        {{/if}}
         <div class="title">{{title}}</div>
         <div class="description">{{message}}</div>
         <div class="gallery">
-            <img src="{{imageUrl}}"/>
-            <div class="highlight">
-                <div class="title">{{imageTitle}}</div>
-            </div>
+            {{#if imageUrl}}
+                <img src="{{imageUrl}}"/>
+            {{/if}}
+            {{#if imageTitle}}
+                <div class="highlight">
+                    <div class="title">{{imageTitle}}</div>
+                </div>
+            {{/if}}
         </div>
-        {{#each buttons}}
-            <div class="button">{{title}}</div>
-        {{/each}}
+        {{#if buttons}}
+            {{#each buttons}}
+                <div class="button">{{title}}</div>
+            {{/each}}
+        {{/if}}
     </section>
 </script>
 
