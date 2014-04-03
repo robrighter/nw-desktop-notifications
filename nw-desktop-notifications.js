@@ -26,7 +26,6 @@
 			'nw-desktop-notifications.html', {
 			frame: false,
 			toolbar: true,
-			width: WINDOW_WIDTH,
 			'always-on-top': true,
 			show: false,
 			resizable: false
