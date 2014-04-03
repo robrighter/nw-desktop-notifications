@@ -16,6 +16,11 @@ body {
     min-height: 80px;
     border: solid 1px #D8D8D8;
     position: relative;
+    overflow: auto;
+}
+
+#notifications {
+    overflow: auto;
 }
 
 .icon {
