@@ -120,7 +120,7 @@
              <section id="{{id}}">
              {{#if iconUrl}}
              <div class="icon">
-             <img src="{{iconUrl}}"/>
+             <img class="icons" src="{{iconUrl}}"/>
              </div>
              {{/if}}
              <div class="title">{{title}}</div>
@@ -143,18 +143,18 @@
              <section id="{{id}}">
              {{#if iconUrl}}
              <div class="icon">
-             <img src="{{iconUrl}}"/>
+             <img class="icons" src="{{iconUrl}}"/>
              </div>
              {{/if}}
              <div class="title">{{title}}</div>
              <div class="description">{{message}}</div>
              <div class="gallery">
              {{#if imageUrl}}
-             <img src="{{imageUrl}}"/>
+             <img class="gallery-image" src="{{imageUrl}}"/>
              {{/if}}
              {{#if imageTitle}}
              <div class="highlight">
-             <div class="title">{{imageTitle}}</div>
+             <div class="gallery-image title">{{imageTitle}}</div>
              </div>
              {{/if}}
              </div>
