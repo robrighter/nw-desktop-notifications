@@ -183,24 +183,21 @@
         }
 
         console.log(options);
-        /*
-         * Mapping of prior to DEA
-         *
-         * icon     -> opt.iconUrl
-         * title    -> opt.title
-         * content  -> opt.message
-         */
-        window.DEA.notifications.create(options, function (id) {
-            console.log('clicked ', id);
 
-            /* Different event listeners are going here */
-            $status.text('Clicked on ' + options.title);
+        window.DEA.notifications.create(options, function (id, target) {
+
+            console.log(id, target);
+            window.lastE = target;
+
+            $status.text('Clicked on ' + target);
             $status.fadeIn('fast', function () {
                 setTimeout(function () {
-                    $('#status').fadeOut('slow');
-                }, 1800);
+                    $status.fadeOut('slow');
+                }, 2000);
             });
         });
+
+
     });
 </script>
 </body>

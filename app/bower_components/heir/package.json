@@ -1,0 +1,31 @@
+{
+	"name": "heir",
+	"version": "2.0.0",
+	"description": "Makes prototypical inheritance easy and robust",
+	"license": "MIT",
+	"main": "heir.js",
+	"readmeFilename": "README.md",
+	"bugs": {
+		"url": "https://github.com/Wolfy87/Heir/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/Wolfy87/Heir.git"
+	},
+	"directories": {
+		"test": "tests"
+	},
+	"keywords": [
+		"prototype",
+		"inheritance",
+		"class",
+		"extend",
+		"inherit",
+		"oop"
+	],
+	"author": {
+		"name": "Oliver Caldwell",
+		"email": "olliec87@gmail.com",
+		"url": "http://oli.me.uk/"
+	}
+}
