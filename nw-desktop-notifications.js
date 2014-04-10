@@ -11,7 +11,6 @@
 
     var requireNode = window.require;
 	var WINDOW_WIDTH = 352;
-    var WINDOW_HEIGHT = 50;
     var height, width;
 	var gui = null;
 	var counter = 0;
@@ -37,6 +36,7 @@
 		win.on('loaded', function(){
 			window.DEA.DesktopNotificationsWindowIsLoaded = true;
 			$body = $(win.window.document.body);
+
             // Close notification when X is pressed
             $body.find('#closer').click(function(){
 				slideOutNotificationWindow();
@@ -59,6 +59,9 @@
 		if(!gui){
 			return false;
 		}
+
+        closeAnyOpenNotificationWindows();
+
 		if(!window.DEA.DesktopNotificationsWindow){
 			makeNewNotifyWindow();
 		}
@@ -66,7 +69,6 @@
 			appendNotificationToWindow(options, onClick).then(function() {
                 slideInNotificationWindow();
             });
-			//$(window.DEA.DesktopNotificationsWindow.window.document.body).find('#shouldstart').text('true');
 		};
 		if(window.DEA.DesktopNotificationsWindowIsLoaded){
 			continuation();
@@ -86,19 +88,19 @@
         // Template is here and as a multiline string for the sake of readability since we cannot have them in the HTML
         var templateSource = (function () {/*
              <section id="{{id}}">
-             {{#if iconUrl}}
-                <div class="icon">
-                   <img class="icons" src="{{iconUrl}}"/>
-                </div>
-             {{/if}}
-             <div class="title">{{title}}</div>
-             <div class="description">{{message}}</div>
-             {{#if buttonPrimary}}
-                <div class="button primary">{{buttonPrimary}}</div>
-             {{/if}}
-             {{#if buttonSecondary}}
-                <div class="button secondary">{{buttonSecondary}}</div>
-             {{/if}}
+                 {{#if iconUrl}}
+                    <div class="icon">
+                       <img class="icons" src="{{iconUrl}}"/>
+                    </div>
+                 {{/if}}
+                 <div class="title">{{title}}</div>
+                 <div class="description">{{message}}</div>
+                 {{#if buttonPrimary}}
+                    <div class="button primary">{{buttonPrimary}}</div>
+                 {{/if}}
+                 {{#if buttonSecondary}}
+                    <div class="button secondary">{{buttonSecondary}}</div>
+                 {{/if}}
              </section>
          */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
         var compiledTemplate = Handlebars.compile(templateSource);
@@ -110,29 +112,29 @@
         // Template is here and as a multiline string for the sake of readability since we cannot have them in the HTML
         var templateSource = (function () {/*
              <section id="{{id}}">
-             {{#if iconUrl}}
-                <div class="icon">
-                   <img class="icons" src="{{iconUrl}}"/>
-                </div>
-             {{/if}}
-             <div class="title">{{title}}</div>
-             <div class="description">{{message}}</div>
-             <div class="gallery">
-                 {{#if imageUrl}}
-                    <img class="gallery-image" src="{{imageUrl}}"/>
-                 {{/if}}
-                 {{#if imageTitle}}
-                    <div class="highlight">
-                       <div class="gallery-image title">{{imageTitle}}</div>
+                 {{#if iconUrl}}
+                    <div class="icon">
+                       <img class="icons" src="{{iconUrl}}"/>
                     </div>
                  {{/if}}
-             </div>
-             {{#if buttonPrimary}}
-                <div class="button primary">{{buttonPrimary}}</div>
-             {{/if}}
-             {{#if buttonSecondary}}
-                <div class="button secondary">{{buttonSecondary}}</div>
-             {{/if}}
+                 <div class="title">{{title}}</div>
+                 <div class="description">{{message}}</div>
+                 <div class="gallery">
+                     {{#if imageUrl}}
+                        <img class="gallery-image" src="{{imageUrl}}"/>
+                     {{/if}}
+                     {{#if imageTitle}}
+                        <div class="highlight">
+                           <div class="gallery-image title">{{imageTitle}}</div>
+                        </div>
+                     {{/if}}
+                 </div>
+                 {{#if buttonPrimary}}
+                    <div class="button primary">{{buttonPrimary}}</div>
+                 {{/if}}
+                 {{#if buttonSecondary}}
+                    <div class="button secondary">{{buttonSecondary}}</div>
+                 {{/if}}
              </section>
          */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
         var compiledTemplate = Handlebars.compile(templateSource);
@@ -142,7 +144,6 @@
 	function appendNotificationToWindow(options, onClick) {
         var dfd = $.Deferred();
 		var elemId = getUniqueId();
-        console.log(elemId);
         var markup;
         switch (options.type) {
             case 'text':
@@ -227,7 +228,6 @@
     /*
      * Custom sliding IN animations here, slide right, slide left, slide up, slide down...
      */
-
 	function slideInNotificationWindow(){
 		var win = window.DEA.DesktopNotificationsWindow;
 		if(win.NOTIFICATION_IS_SHOWING){
@@ -236,7 +236,6 @@
 		var y = screen.availTop;
 		var x = WINDOW_WIDTH;
 		win.moveTo(getXPositionOfNotificationWindow(win),y);
-        console.log(window.DEA.width, window.DEA.height);
         win.resizeTo(window.DEA.width, window.DEA.height)
         win.show();
 		win.NOTIFICATION_IS_SHOWING = true;
