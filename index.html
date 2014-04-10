@@ -32,11 +32,11 @@
             outline: 0;
         }
 
-        input[type=text], input[type=submit] {
+        input[type=text], input[type=submit], #hide {
             width: 450px;
         }
 
-        input[type=submit] {
+        input[type=submit], #hide {
             font-size: 20px;
             background-color: #1ABC9C;
             color: white;
@@ -60,6 +60,25 @@
         input, input:hover, input:focus, input:active {
         }
 
+        /* red hide notifications button */
+        #hide {
+            background-color: #E74C3C;
+            text-align: center;
+        }
+
+        #hide:hover {
+            background-color: #EC7063;
+        }
+
+        #hide:active {
+            background-color: #C44133;
+        }
+
+        #hide:focus {
+            outline: 0;
+            background-color: #EC7063;
+        }
+        /* end red notifications button */
 
         #status {
             border: 1px solid #84C03A;
@@ -70,7 +89,7 @@
             font-size: 12px;
         }
 
-        #imageUrl, #imageTitle {
+        #imageUrl, #imageTitle, #hide {
             display: none;
         }
 
@@ -121,6 +140,11 @@
     <p id="submissionButton">
         <input id="submission" type='submit' value='Create Notification &raquo;'/>
     </p>
+
+    <p id="hideButton">
+        <input id="hide" value='Close Notification'/>
+    </p>
+
 </form>
 <div id='status' style='display: none;'></div>
 
@@ -158,14 +182,14 @@
             secondaryButton = form.find('input[name=actionButtonSecondary]').val(),
             imageUrl = form.find('input[name=imageUrl]').val(),
             imageTitle = form.find('input[name=imageTitle]').val(),
-            $status = $('#status');
+            $status = $('#status'),
+            $hideButton = $('#hide');
 
         var options = {
             type: notificationType,
             title: title,
             message: message,
-            iconUrl: icon,
-            buttons: []
+            iconUrl: icon
         };
 
         // Extend image notifications with a couple extra parameters
@@ -175,34 +199,46 @@
         }
 
         if (primaryButton) {
-            options.buttons.push({'title': primaryButton});
+            options.buttonPrimary = primaryButton;
         }
 
         if (secondaryButton) {
-            options.buttons.push({'title': secondaryButton});
+            options.buttonSecondary = secondaryButton;
         }
 
+        // Lets look at options before we send them
         console.log(options);
 
         window.DEA.notifications.create(options, function (id, target) {
 
             console.log(id, target);
-            window.lastE = target;
 
-            /*
-             * Possible Events:
-             *
-             * "close"
-             * "title"
-             * "description"
-             * "icons"
-             * "gallery-image"
-             * "gallery-image title"
-             * "button"
-             * // TODO find button order
-             */
+            // Possible Events
+            switch (target) {
+                case 'closer':
+                    $hideButton.fadeOut();
+                    break;
+                case 'title':
+                    break;
+                case 'description':
+                    break;
+                case 'icons':
+                    break;
+                case 'gallery-image':
+                    break;
+                case 'gallery-image title':
+                    break;
+                case 'button primary':
+                    $hideButton.fadeOut();
+                    break;
+                case 'button secondary':
+                    $hideButton.fadeOut();
+                    break;
+                default:
+                    break;
+            }
 
-
+            // Print out what we clicked on in the demo app
             $status.text('Clicked on ' + target);
             $status.fadeIn('fast', function () {
                 setTimeout(function () {
@@ -211,6 +247,13 @@
             });
         });
 
+        // show the hide button when a notification is active
+        $hideButton.fadeIn();
+
+        $hideButton.click(function() {
+            window.DEA.notifications.clear();
+            $hideButton.fadeOut();
+        });
 
     });
 </script>

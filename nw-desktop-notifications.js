@@ -1,39 +1,5 @@
 (function(){
 
-    /**
-     * @author Erik Karlsson, www.nonobtrusive.com
-     */
-    function Dispatcher(){
-        this.events=[];
-    }
-    Dispatcher.prototype.addEventlistener=function(event,callback){
-        this.events[event] = this.events[event] || [];
-        if ( this.events[event] ) {
-            this.events[event].push(callback);
-        }
-    }
-    Dispatcher.prototype.removeEventlistener=function(event,callback){
-        if ( this.events[event] ) {
-            var listeners = this.events[event];
-            for ( var i = listeners.length-1; i>=0; --i ){
-                if ( listeners[i] === callback ) {
-                    listeners.splice( i, 1 );
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-    Dispatcher.prototype.dispatch=function(event){
-        if ( this.events[event] ) {
-            var listeners = this.events[event], len = listeners.length;
-            while ( len-- ) {
-                listeners[len](this);	//callback with self
-            }
-        }
-    }
-
-
     /*
      handlebars v1.3.0
      Copyright (C) 2011 by Yehuda Katz
@@ -70,7 +36,9 @@
 		window.DEA.DesktopNotificationsWindowIsLoaded = false;
 		win.on('loaded', function(){
 			window.DEA.DesktopNotificationsWindowIsLoaded = true;
-			$(win.window.document.body).find('#closer').click(function(){
+			$body = $(win.window.document.body);
+            // Close notification when X is pressed
+            $body.find('#closer').click(function(){
 				slideOutNotificationWindow();
 			});
 		});
@@ -119,16 +87,17 @@
         var templateSource = (function () {/*
              <section id="{{id}}">
              {{#if iconUrl}}
-             <div class="icon">
-             <img class="icons" src="{{iconUrl}}"/>
-             </div>
+                <div class="icon">
+                   <img class="icons" src="{{iconUrl}}"/>
+                </div>
              {{/if}}
              <div class="title">{{title}}</div>
              <div class="description">{{message}}</div>
-             {{#if buttons}}
-             {{#each buttons}}
-             <div class="button">{{title}}</div>
-             {{/each}}
+             {{#if buttonPrimary}}
+                <div class="button primary">{{buttonPrimary}}</div>
+             {{/if}}
+             {{#if buttonSecondary}}
+                <div class="button secondary">{{buttonSecondary}}</div>
              {{/if}}
              </section>
          */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
@@ -142,26 +111,27 @@
         var templateSource = (function () {/*
              <section id="{{id}}">
              {{#if iconUrl}}
-             <div class="icon">
-             <img class="icons" src="{{iconUrl}}"/>
-             </div>
+                <div class="icon">
+                   <img class="icons" src="{{iconUrl}}"/>
+                </div>
              {{/if}}
              <div class="title">{{title}}</div>
              <div class="description">{{message}}</div>
              <div class="gallery">
-             {{#if imageUrl}}
-             <img class="gallery-image" src="{{imageUrl}}"/>
-             {{/if}}
-             {{#if imageTitle}}
-             <div class="highlight">
-             <div class="gallery-image title">{{imageTitle}}</div>
+                 {{#if imageUrl}}
+                    <img class="gallery-image" src="{{imageUrl}}"/>
+                 {{/if}}
+                 {{#if imageTitle}}
+                    <div class="highlight">
+                       <div class="gallery-image title">{{imageTitle}}</div>
+                    </div>
+                 {{/if}}
              </div>
+             {{#if buttonPrimary}}
+                <div class="button primary">{{buttonPrimary}}</div>
              {{/if}}
-             </div>
-             {{#if buttons}}
-             {{#each buttons}}
-             <div class="button">{{title}}</div>
-             {{/each}}
+             {{#if buttonSecondary}}
+                <div class="button secondary">{{buttonSecondary}}</div>
              {{/if}}
              </section>
          */}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
@@ -217,7 +187,7 @@
 
         //Add click event listener for the whole notification
         // anywhere in the container
-		jqBody.find('#'+elemId).click(function(e) {
+        jqBody.find('#'+elemId).click(function(e) {
             return eventHandler(e, elemId, onClick);
         });
         jqBody.find('#closer').click(function(e) {
@@ -232,10 +202,12 @@
         jqBody.find('.icon').click(function(e) {
             return eventHandler(e, elemId, onClick);
         });
-        jqBody.find('.button').find('.primary').click(function(e) {
+        jqBody.find('.button.primary').click(function(e) {
+            slideOutNotificationWindow();
             return eventHandler(e, elemId, onClick);
         });
-        jqBody.find('.button').find('.secondary').click(function(e) {
+        jqBody.find('.button.secondary').click(function(e) {
+            slideOutNotificationWindow();
             return eventHandler(e, elemId, onClick);
         });
 
@@ -331,12 +303,15 @@
             return str;
         }
     }
+    function clear() {
+        slideOutNotificationWindow();
+    }
 
     window.DEA.notifications = {
         create: create,
-        closeAnyOpenNotificationWindows: closeAnyOpenNotificationWindows,
         height: height,
-        width: width
+        width: width,
+        clear: clear
     };
 
 

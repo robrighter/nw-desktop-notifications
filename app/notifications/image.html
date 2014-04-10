@@ -75,10 +75,11 @@
                 </div>
             {{/if}}
         </div>
-        {{#if buttons}}
-            {{#each buttons}}
-                <div class="button">{{title}}</div>
-            {{/each}}
+        {{#if buttonPrimary}}
+            <div class="button primary">{{buttonPrimary}}</div>
+        {{/if}}
+        {{#if buttonSecondary}}
+            <div class="button secondary">{{buttonSecondary}}</div>
         {{/if}}
     </section>
 </script>
