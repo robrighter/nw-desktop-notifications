@@ -6,7 +6,7 @@ A customized desktop notifications system for [node-webkit](https://github.com/r
 
 1. Include the javascript `nw-desktop-notifications.js` in your application
 
-2. Include the HTML template `dea-notifications.html` in your application
+2. Include the HTML template `nw-desktop-notifications` in your application
 
 3. Create a notification using the API: `DEA.notifications.create(options, callback);`
 
@@ -32,7 +32,7 @@ A customized desktop notifications system for [node-webkit](https://github.com/r
 
 3. `nw-desktop-notifications.js` created the notification and appends the template to the created notification window.
 
-4. `dea-notifications.html` is simply the container for the content. It handles closing itself and sending off interaction events back to the parent who initiated the notification.
+4. `nw-desktop-notifications` is simply the container for the content. It handles closing itself and sending off interaction events back to the parent who initiated the notification.
 
 ## Notification Types
 
