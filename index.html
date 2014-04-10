@@ -209,9 +209,9 @@
         // Lets look at options before we send them
         console.log(options);
 
-        window.DEA.notifications.create(options, function (id, target) {
+        window.DEA.notifications.create(options, function (target) {
 
-            console.log(id, target);
+            console.log(target);
 
             // Possible Events
             switch (target) {

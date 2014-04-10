@@ -223,7 +223,7 @@
 
     function eventHandler(event, id, callback) {
         target = event.target.className || event.target.id || event.target.nodeName.toLowerCase();
-        callback(id, target);
+        callback(target);
     }
 
     /*
