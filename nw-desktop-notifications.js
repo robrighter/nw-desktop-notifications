@@ -51,6 +51,7 @@
 		if(window.DEA.DesktopNotificationsWindow){
 			window.DEA.DesktopNotificationsWindow.close(true);
 			window.DEA.DesktopNotificationsWindow = null;
+            return true;
 		}
 	}
 
@@ -302,8 +303,9 @@
             return str;
         }
     }
-    function clear() {
+    function clear(callback) {
         slideOutNotificationWindow();
+        callback(true);
     }
 
     window.DEA.notifications = {

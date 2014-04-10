@@ -251,7 +251,9 @@
         $hideButton.fadeIn();
 
         $hideButton.click(function() {
-            window.DEA.notifications.clear();
+            window.DEA.notifications.clear(function(wasCleared){
+                console.log('notification was cleared ', wasCleared);
+            });
             $hideButton.fadeOut();
         });
 
