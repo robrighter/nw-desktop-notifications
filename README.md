@@ -8,7 +8,7 @@ A customized desktop notifications system for [node-webkit](https://github.com/r
 
 2. Include the HTML template `dea-notifications.html` in your application
 
-3. Create a notification using the API: `DEA.notifications.create(id, options, callback);`
+3. Create a notification using the API: `DEA.notifications.create(options, callback);`
 
 ##Running the demo
 
