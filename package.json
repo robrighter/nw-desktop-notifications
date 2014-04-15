@@ -1,19 +1,20 @@
 {
-	"main": "index.html",
-	"name": "NW Desktop Notifications Demo",
-	"description": "A demo of desktop notifications",
-	"version": "0.1",
-	"keywords": [ "node-webkit", "Desktop Notifications" ],
-	"window": {
-		"toolbar": true,
-		"width": 520,
-		"height": 800,
-		"position": "mouse",
-		"min_width": 400,
-		"min_height": 200
-	},
-	"webkit": {
-		"plugin": true, //turns off browser plugins
-		"page-cache": false
-	}
+    "name": "nw-desktop-notifications",
+    "version": "0.1.0",
+    "description": "custom node-webkit notifications",
+    "devDependencies": {
+        "matchdep": "~0.1.2",
+        "grunt": "~0.4.4",
+        "grunt-node-webkit-builder": "~0.1.20"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pbojinov/nw-desktop-notifications.git"
+    },
+    "author": "Petar Bojinov <petarbojinov@gmail.com> (http://pbojinov.com/)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/pbojinov/nw-desktop-notifications/issues"
+    },
+    "homepage": "https://github.com/pbojinov/nw-desktop-notifications"
 }

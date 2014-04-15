@@ -1,3 +1,5 @@
 desktop-notify.nw
 .idea/
 media/
+node_modules/
+webkitbuilds/

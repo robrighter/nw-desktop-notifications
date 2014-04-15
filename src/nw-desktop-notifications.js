@@ -9,14 +9,10 @@
 
     /*****/
 
-    var requireNode = window.require;
 	var WINDOW_WIDTH = 352;
     var height, width;
-	var gui = null;
+	var gui = require('nw.gui');
 	var counter = 0;
-	if(requireNode){
-		gui = requireNode('nw.gui');
-	}
 
 	if(!window.DEA){
 		window.DEA = {};
