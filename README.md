@@ -14,7 +14,7 @@ A customized desktop notifications system for [node-webkit](https://github.com/r
 
 (1) Clone this project
 
-(2) cd into the project
+(2) cd into the project /src
 
 (3) Make the nw zip file by running the bash script
 
@@ -23,6 +23,16 @@ A customized desktop notifications system for [node-webkit](https://github.com/r
 (4) Run the nw application
 
 	node-webkit desktop-notify.nw
+
+## Building for Production
+
+From the root of the project:
+
+	npm install
+
+	grunt build
+
+Then run the executable/app from /webkitbuilds/release/NW Desktop Notifications Demo
 
 ## Application Flow
 
