@@ -48,8 +48,8 @@ Then run the executable/app from /webkitbuilds/release/NW Desktop Notifications 
 
 ### Text
 
-![Text Notification](docs/images/text_notification.png)
+![Text Notification](doc/images/text_notification.png)
 
 ### Image
 
-![Image Notification](docs/images/image_notification.png)
+![Image Notification](doc/images/image_notification.png)
