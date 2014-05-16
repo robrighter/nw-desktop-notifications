@@ -22,7 +22,7 @@
 		var win = gui.Window.open(
 			'nw-desktop-notifications.html', {
 			frame: false,
-			toolbar: true,
+			toolbar: false,
 			'always-on-top': true,
 			show: false,
 			resizable: true
