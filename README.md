@@ -1,9 +1,11 @@
 # Nodeifications
 
-Chrome like desktop notifications for [node-webkit](https://github.com/rogerwang/node-webkit) apps.
+Simple cross platform desktop notifications for [node-webkit](https://github.com/rogerwang/node-webkit) apps, inspired by [Chrome Notifications](https://developer.chrome.com/apps/notifications).
 
 ![Nodeifications Intro Banner](doc/images/nodeifications-wide.jpg)
 
+
+[Documentation](https://github.com/pbojinov/nw-desktop-notifications/wiki/Getting-Started) on the wiki
 
 ## Getting Started
 
@@ -13,7 +15,7 @@ Chrome like desktop notifications for [node-webkit](https://github.com/rogerwang
 
 3. Create a notification using the API: `DEA.notifications.create(options, callback);`
 
-##Running the demo
+## Running the demo
 
 (1) Clone this project
 
@@ -46,6 +48,7 @@ Then run the executable/app from /webkitbuilds/release/NW Desktop Notifications 
 3. `nw-desktop-notifications.js` created the notification and appends the template to the created notification window.
 
 4. `nw-desktop-notifications.html` is simply the container for the content. It handles closing itself and sending off interaction events back to the parent who initiated the notification.
+
 
 ## Notification Types
 
