@@ -1,6 +1,9 @@
-## Customized Desktop Notifications -
+# Nodeifications
 
-A customized desktop notifications system for [node-webkit](https://github.com/rogerwang/node-webkit) applications.
+Chrome like desktop notifications for [node-webkit](https://github.com/rogerwang/node-webkit) apps.
+
+![Nodeifications Intro Banner](doc/images/nodeifications-wide.jpg)
+
 
 ## Getting Started
 
