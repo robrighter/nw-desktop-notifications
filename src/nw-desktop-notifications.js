@@ -27,6 +27,7 @@
 			show: false,
 			resizable: true
 		});
+		win.setShowInTaskbar(false);
 		window.DEA.DesktopNotificationsWindow = win;
 		window.DEA.DesktopNotificationsWindowIsLoaded = false;
 		win.on('loaded', function(){
