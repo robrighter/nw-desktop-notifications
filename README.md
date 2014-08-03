@@ -51,6 +51,10 @@ Then run the executable/app from inside `/webkitbuilds`
 
 4. `nw-desktop-notifications.html` is simply the container for the content. It handles closing itself and sending off interaction events back to the parent who initiated the notification.
 
+## Notes
+
+- node-webkit version `0.9.2` or later is required for this example (because [`Window.setShowInTaskbar`](https://github.com/rogerwang/node-webkit/wiki/Window#windowsetshowintaskbarboolean-show) is used).
+
 
 ## Notification Types
 
