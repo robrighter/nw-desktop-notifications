@@ -1,5 +1,6 @@
 desktop-notify.nw
 .idea/
+*.iml
 media/
 node_modules/
 webkitbuilds/
