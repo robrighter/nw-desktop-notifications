@@ -4,3 +4,4 @@ desktop-notify.nw
 media/
 node_modules/
 webkitbuilds/
+cache/

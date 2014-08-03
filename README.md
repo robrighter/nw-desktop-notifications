@@ -19,15 +19,17 @@ Simple cross platform desktop notifications for [node-webkit](https://github.com
 
 (1) Clone this project
 
-(2) cd into the project /src
+(2) Run `npm install`
 
-(3) Make the nw zip file by running the bash script
+(3) Make the nw zip file by running the default gulp task
 
-	./make-nw.sh
+	gulp
 
-(4) Run the nw application
+(4) `cd` into the project `/src`
 
-	node-webkit desktop-notify.nw
+(5) Run the nw application
+
+	nodewebkit desktop-notify.nw
 
 ## Building for Production
 
@@ -35,9 +37,9 @@ From the root of the project:
 
 	npm install
 
-	grunt build
+	gulp build
 
-Then run the executable/app from /webkitbuilds/release/NW Desktop Notifications Demo
+Then run the executable/app from inside `/webkitbuilds`
 
 ## Application Flow
 
