@@ -20,14 +20,14 @@
 
 	function makeNewNotifyWindow(){
 		var win = gui.Window.open(
-			'nw-desktop-notifications.html', {
+			'nodeifications.html', {
 			frame: false,
 			toolbar: false,
 			'always-on-top': true,
 			show: false,
 			resizable: true
 		});
-		win.setShowInTaskbar(false);
+		//win.setShowInTaskbar(false);
 		window.DEA.DesktopNotificationsWindow = win;
 		window.DEA.DesktopNotificationsWindowIsLoaded = false;
 		win.on('loaded', function(){

@@ -1,5 +1,5 @@
 {
-  "name": "nw-desktop-notifications",
+  "name": "nodeifications",
   "version": "0.1.0",
   "description": "custom node-webkit notifications",
   "devDependencies": {
@@ -10,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pbojinov/nw-desktop-notifications.git"
+    "url": "https://github.com/pbojinov/nodeifications.git"
   },
   "author": "Petar Bojinov <petarbojinov@gmail.com> (http://pbojinov.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pbojinov/nw-desktop-notifications/issues"
+    "url": "https://github.com/pbojinov/nodeifications/issues"
   },
-  "homepage": "https://github.com/pbojinov/nw-desktop-notifications"
+  "homepage": "https://github.com/pbojinov/nodeifications"
 }

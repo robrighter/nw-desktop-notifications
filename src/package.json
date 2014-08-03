@@ -1,7 +1,7 @@
 {
     "main": "index.html",
-    "name": "NW Desktop Notifications Demo",
-    "description": "A demo of desktop notifications",
+    "name": "Nodeifications Demo",
+    "description": "A demo of nodeifications",
     "version": "0.1.0",
     "keywords": ["node-webkit", "desktop notifications"],
     "window": {
