@@ -24,6 +24,6 @@ gulp.task('build', function(done){
 
 gulp.task('generate-nw', function(){
     return gulp.src(paths.sourceFiles, {dot: true})
-        .pipe($.zip('desktop-notify.nw'))
+        .pipe($.zip('nodeifications.nw'))
         .pipe(gulp.dest('./src'));
 });

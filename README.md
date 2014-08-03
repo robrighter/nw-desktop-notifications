@@ -29,7 +29,7 @@ Simple cross platform desktop notifications for [node-webkit](https://github.com
 
 (5) Run the nw application
 
-	nodewebkit desktop-notify.nw
+	nodewebkit nodeifications.nw
 
 ## Building for Production
 
