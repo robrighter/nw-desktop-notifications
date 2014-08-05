@@ -5,4 +5,5 @@ media/
 node_modules/
 webkitbuilds/
 cache/
-*.log
+*.logcommit_images
+commit_images/
