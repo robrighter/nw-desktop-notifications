@@ -4,8 +4,7 @@ Simple cross platform desktop notifications for [node-webkit](https://github.com
 
 ![Nodeifications Intro Banner](doc/images/nodeifications-wide.jpg)
 
-
-[Documentation](https://github.com/pbojinov/nodeifications/wiki/Getting-Started) on the wiki
+## [API Documentation](https://github.com/pbojinov/nodeifications/wiki/Getting-Started) on the wiki
 
 ## Getting Started
 
