@@ -1,6 +1,6 @@
 {
   "name": "nodeifications",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "custom node-webkit notifications",
   "devDependencies": {
     "gulp": "^3.8.7",
@@ -13,6 +13,7 @@
     "url": "https://github.com/pbojinov/nodeifications.git"
   },
   "author": "Petar Bojinov <petarbojinov@gmail.com> (http://pbojinov.com/)",
+  "contributors": "Adam Lynch <contact@adamlynch.com> (http://adamlynch.com)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/pbojinov/nodeifications/issues"
