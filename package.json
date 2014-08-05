@@ -16,5 +16,6 @@
     "bugs": {
         "url": "https://github.com/pbojinov/nw-desktop-notifications/issues"
     },
-    "homepage": "https://github.com/pbojinov/nw-desktop-notifications"
+    "homepage": "https://github.com/pbojinov/nw-desktop-notifications",
+    "private": true
 }
