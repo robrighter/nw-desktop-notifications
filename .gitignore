@@ -1,5 +1,9 @@
-desktop-notify.nw
+*.nw
 .idea/
+*.iml
 media/
 node_modules/
 webkitbuilds/
+cache/
+*.logcommit_images
+commit_images/
