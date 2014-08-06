@@ -14,19 +14,21 @@ Simple cross platform desktop notifications for [node-webkit](https://github.com
 
 3. Create a notification using the API: `DEA.notifications.create(options, callback);`
 
-## Running the demo
+## Running the demo app
 
-(1) Clone this project
+1. Clone this project
 
-(2) Run `npm install`
+	git clone git@github.com:pbojinov/nodeifications.git
 
-(3) Make the nw zip file by running the default gulp task
+2. Run `npm install`
+
+3. Make the nw zip file by running the default gulp task
 
 	gulp
 
-(4) `cd` into the project `/src`
+4. `cd` into the project `/src`
 
-(5) Run the nw application
+5. Run the nw application
 
 	nodewebkit nodeifications.nw
 
