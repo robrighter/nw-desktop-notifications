@@ -18,13 +18,13 @@ Simple cross platform desktop notifications for [node-webkit](https://github.com
 
 1. Clone this project
 
-	git clone git@github.com:pbojinov/nodeifications.git
+        git clone git@github.com:pbojinov/nodeifications.git
 
 2. Run `npm install`
 
 3. Make the nw zip file by running the default gulp task
 
-	gulp
+        gulp
 
 4. `cd` into the project `/src`
 
