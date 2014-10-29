@@ -1,0 +1,112 @@
+/**
+ * Author: petar
+ * Date: 4/1/14
+ */
+body {
+    font-family: 'Open Sans', sans-serif;
+
+    /* we dont want user highlighting text */
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+}
+
+.container {
+    width: 350px;
+    min-height: 80px;
+    border: solid 1px #D8D8D8;
+    position: relative;
+    overflow: auto;
+}
+
+#notifications {
+    overflow: auto;
+}
+
+.icon {
+    margin: 0 15px 0 0;
+    float: left;
+}
+
+.icon img {
+    width: 80px;
+    height: 80px;
+}
+
+.title, .description {
+    margin: 10px 30px 0 30px;
+    text-align: justify;
+}
+
+.title {
+    font-size: 15px;
+}
+
+.description {
+    font-size: 12px;
+    padding-bottom: 20px;
+}
+
+#closer {
+    border: 1px solid #fff;
+    border-radius: 50%;
+    color: #727272;
+    text-align: center;
+    float: right;
+    font-size: 10px;
+    width: 15px;
+    margin: 10px 3px 0 0;
+    -webkit-app-region: no-drag;
+}
+
+#closer:hover {
+    border: 1px solid #ccc;
+    cursor: pointer;
+    color: #fff;
+    background-color: #8F8F8F;
+}
+
+#closer:active {
+    background-color: #707070;
+}
+
+.button {
+    border-top: solid 1px #eeeeee;
+    clear: both;
+    font-size: 13px;
+    padding: 10px 0 10px 20px;
+}
+
+.button:hover {
+    background-color: #eeeeee;
+    cursor: pointer;
+}
+
+.button:active {
+    background-color: #cccccc;
+}
+
+/* Image notification specific css */
+.gallery {
+    clear: both;
+    position: relative;
+}
+
+.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+.highlight {
+    background: rgb(0,0,0); /* The Fallback */
+    background-color: rgba(0,0,0,0.7);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.highlight .title {
+    color: #fff;
+    margin: 10px 10px 10px 15px;
+    line-height: 18px;
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Desktop Notification</title>
+        <link rel="stylesheet" href="app/bower_components/normalize-css/normalize.css"/>
+        <link rel="stylesheet" href="app/bower_components/open-sans-fontface/open-sans-custom.css"/>
+        <link rel="stylesheet" href="app/notifications/nodeifications-shared.css"/>
+		<script src="app/bower_components/jquery/dist/jquery.js"></script>
+		<style type="text/css">
+			body {
+                font-family: 'Open Sans', sans-serif;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+				-webkit-app-region: no-drag;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+			}
+			/*#notifications {*/
+				/*position: absolute;*/
+				/*top: 0px;*/
+				/*left: 0px;*/
+				/*list-style: none;*/
+				/*margin: 0px;*/
+				/*padding: 10px 10px 10px 10px;*/
+				/*-webkit-app-region: no-drag;*/
+			/*}*/
+			/*#notifications section {*/
+				/*overflow: hidden;*/
+				/*margin: 0px;*/
+                /*display: none;*/
+				/*cursor: pointer;*/
+			/*}*/
+			/*#shouldstart {*/
+				/*display:none;*/
+			/*}*/
+		</style>
+	</head>
+	<body style="-webkit-app-region: no-drag;">
+        <div class="container">
+            <div id="closer">&times;</div>
+            <div id="notifications">
+            </div>
+        </div>
+		<!--<div id='shouldstart'>false</div>-->
+
+		<!--<script type="text/javascript">-->
+			<!--var LIMIT_FOR_TRUNKATING_MESSAGES = 5;-->
+			<!--function processNotifications(){-->
+				<!--var nlist = $('#notifications');-->
+				<!--var n = $('#notifications > section');-->
+				<!--var continuation = function(){-->
+					<!--n = $('#notifications > section');-->
+					<!--if(n.length === 0){-->
+						<!--//lets close the window-->
+						<!--$('#closer').click();-->
+						<!--$('#shouldstart').text('false');-->
+						<!--waitForKickoff();-->
+						<!--return;-->
+					<!--}-->
+					<!--else if(n.length > LIMIT_FOR_TRUNKATING_MESSAGES){-->
+						<!--var toinsert = "<section>"+-->
+							<!--"<div class='icon'>" +-->
+								<!--"<img src='HTML5_Color_Black.png' />" +-->
+							<!--"</div>" +-->
+							<!--"<div class='title'>Application Name Here</div>" +-->
+							<!--"<div class='description'>"+n.length+" new cards.</div>" +-->
+							<!--"</section>";-->
+						<!--nlist.html(toinsert);-->
+					<!--}-->
+					<!--n = $('#notifications > section');-->
+					<!--n.first().fadeIn('fast');-->
+					<!--setTimeout(processNotifications, 10000); //TODO how long notification is shown for-->
+				<!--}-->
+				<!--if(n.first().is(':visible')){-->
+					<!--n.first().fadeOut('fast', function(){-->
+						<!--n.first().remove();-->
+						<!--continuation();-->
+					<!--});-->
+				<!--}-->
+				<!--else{-->
+					<!--continuation();-->
+				<!--}-->
+			<!--}-->
+
+			<!--function waitForKickoff(){-->
+				<!--if($('#shouldstart').text() === 'true'){-->
+					<!--processNotifications();-->
+				<!--}-->
+				<!--else{-->
+					<!--setTimeout(waitForKickoff,40);-->
+				<!--}-->
+			<!--}-->
+			<!--waitForKickoff();-->
+		<!--</script>-->
+	</body>
+</html>

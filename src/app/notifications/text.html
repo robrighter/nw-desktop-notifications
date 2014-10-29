@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Text Notification</title>
+    <link rel="stylesheet" href="../bower_components/normalize-css/normalize.css"/>
+    <link rel="stylesheet" href="../bower_components/open-sans-fontface/open-sans-custom.css" type="text/css"/>
+    <link rel="stylesheet" href="nodeifications-shared.css"/>
+</head>
+<body>
+
+<div class="container">
+    <div id="closer">X</div>
+    <div id="notifications">
+        <section>
+            <div class="icon">
+                <img src="HTML5_Logo_64.png" alt="Notification Icon"/>
+            </div>
+            <div class="title">What is Lorem Ipsum?</div>
+            <div class="description">Lorem Ipsum is simply dummy text.</div>
+            <div class="button primary">Yes</div>
+            <div class="button secondary">No</div>
+        </section>
+    </div>
+</div>
+
+<script id="text-notification" type="text/x-handlebars-template">
+    <section id="{{id}}">
+        {{#if iconUrl}}
+            <div class="icon">
+                <img src="{{iconUrl}}"/>
+            </div>
+        {{/if}}
+        <div class="title">{{title}}</div>
+        <div class="description">{{message}}</div>
+        {{#if buttonPrimary}}
+            <div class="button primary">{{buttonPrimary}}</div>
+        {{/if}}
+        {{#if buttonSecondary}}
+            <div class="button secondary">{{buttonSecondary}}</div>
+        {{/if}}
+    </section>
+</script>
+
+</body>
+</html>

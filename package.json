@@ -1,19 +1,22 @@
 {
-	"main": "index.html",
-	"name": "NW Desktop Notifications Demo",
-	"description": "A demo of desktop notifications",
-	"version": "0.1",
-	"keywords": [ "node-webkit", "Desktop Notifications" ],
-	"window": {
-		"toolbar": false,
-		"width": 640,
-		"height": 480,
-		"position": "mouse",
-		"min_width": 400,
-		"min_height": 200
-	},
-	"webkit": {
-		"plugin": true, //turns off browser plugins
-		"page-cache": false
-	}
+  "name": "nodeifications",
+  "version": "0.2.0",
+  "description": "custom node-webkit notifications",
+  "devDependencies": {
+    "gulp": "^3.8.7",
+    "gulp-load-plugins": "^0.5.3",
+    "gulp-zip": "^0.5.0",
+    "node-webkit-builder": "^0.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pbojinov/nodeifications.git"
+  },
+  "author": "Petar Bojinov <petarbojinov@gmail.com> (http://pbojinov.com/)",
+  "contributors": "Adam Lynch <contact@adamlynch.com> (http://adamlynch.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pbojinov/nodeifications/issues"
+  },
+  "homepage": "https://github.com/pbojinov/nodeifications"
 }

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic Text Notification</title>
+    <link rel="stylesheet" href="../bower_components/open-sans-fontface/open-sans-custom.css" type="text/css" />
+    <link rel="stylesheet" href="../bower_components/normalize-css/normalize.css"/>
+    <link rel="stylesheet" href="nodeifications-shared.css"/>
+    <style type="text/css">
+        /* Image notification specific css */
+        .gallery {
+            clear: both;
+            position: relative;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
+        }
+
+        .highlight {
+            background: rgb(0,0,0); /* The Fallback */
+            background-color: rgba(0,0,0,0.7);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .highlight .title {
+            color: #fff;
+            margin: 10px 10px 10px 15px;
+            line-height: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="closer">X</div>
+    <div id="notifications">
+        <section>
+            <div class="icon">
+                <img src="HTML5_Logo_64.png" alt="Notification Icon"/>
+            </div>
+            <div class="title">What is Lorem Ipsum?</div>
+            <div class="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+            <div class="gallery">
+                <img src="HTML5_sticker.png" alt="nikes"/>
+                <div class="highlight">
+                    <div class="title">2014 Nike Free 3.0 V4</div>
+                </div>
+            </div>
+            <div class="button primary">Yes</div>
+            <div class="button secondary">No</div>
+        </section>
+    </div>
+</div>
+
+<script id="image-notification" type="text/x-handlebars-template">
+    <section id="{{id}}">
+        {{#if iconUrl}}
+        <div class="icon">
+            <img src="{{iconUrl}}"/>
+        </div>
+        {{/if}}
+        <div class="title">{{title}}</div>
+        <div class="description">{{message}}</div>
+        <div class="gallery">
+            {{#if imageUrl}}
+                <img src="{{imageUrl}}"/>
+            {{/if}}
+            {{#if imageTitle}}
+                <div class="highlight">
+                    <div class="title">{{imageTitle}}</div>
+                </div>
+            {{/if}}
+        </div>
+        {{#if buttonPrimary}}
+            <div class="button primary">{{buttonPrimary}}</div>
+        {{/if}}
+        {{#if buttonSecondary}}
+            <div class="button secondary">{{buttonSecondary}}</div>
+        {{/if}}
+    </section>
+</script>
+
+</body>
+</html>

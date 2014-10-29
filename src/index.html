@@ -1,0 +1,263 @@
+<html>
+<head>
+    <title>Desktop Notification Demo</title>
+    <script src="app/bower_components/jquery/dist/jquery.js"></script>
+    <script src="nodeifications.js"></script>
+    <style type="text/css">
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            background-color: #ECF0F1;
+            color: #7F8C8D;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            font-size: 30px;
+            color: #7F8C8D;
+            margin: 0;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 15px;
+            color: #333;
+        }
+
+        input:focus {
+            outline: 2px solid #1ABC9C;
+        }
+
+        input[type=radio]:focus {
+            outline: 0;
+        }
+
+        input[type=text], input[type=submit], #hide {
+            width: 450px;
+        }
+
+        input[type=submit], #hide {
+            font-size: 20px;
+            background-color: #1ABC9C;
+            color: white;
+            border: 0;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #48C9B0;
+        }
+
+        input[type=submit]:active {
+            background-color: #16A085;
+        }
+
+        input[type=submit]:focus {
+            outline: 0;
+            background-color: #48C9B0;
+        }
+
+        input, input:hover, input:focus, input:active {
+        }
+
+        /* red hide notifications button */
+        #hide {
+            background-color: #E74C3C;
+            text-align: center;
+        }
+
+        #hide:hover {
+            background-color: #EC7063;
+        }
+
+        #hide:active {
+            background-color: #C44133;
+        }
+
+        #hide:focus {
+            outline: 0;
+            background-color: #EC7063;
+        }
+        /* end red notifications button */
+
+        #status {
+            border: 1px solid #84C03A;
+            background-color: #D1FCB3;
+            border-radius: 3px;
+            padding: 4px;
+            color: #84C03A;
+            font-size: 12px;
+        }
+
+        #imageUrl, #imageTitle, #hide {
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+<h1>Notifications Demo</h1>
+<hr/>
+<form id='nwdemo' action='#' method='post' class="form-group">
+    <p>
+        <label>Type:</label>
+        <label for="text" class="radio">
+            <input type="radio" id="text" name="notificationType" checked value="text"/>
+            Text
+        </label>
+        &nbsp;
+        <label for="image" class="radio">
+            <input type="radio" id="image" name="notificationType" value="image"/>
+            Image
+        </label>
+    </p>
+
+    <p>
+        <label for="title">Title:</label><br/>
+        <input id="title" name='title' type='text' value='Some Title'/>
+    </p>
+
+    <p>
+        <label for="description">Message:</label><br/>
+        <input id="description" name='content' type='text' value='Testing of desktop notifications'/>
+    </p>
+
+    <p>
+        <label for="iconUrl">Icon URL (optional): </label> <br>
+        <input id="iconUrl" name='icon' type='text' value='HTML5_Color_Black.png' />
+    </p>
+
+    <p>
+        <label>Primary Button</label><br>
+        <input name='actionButtonPrimary' type='text' value='Yes' />
+    </p>
+
+    <p>
+        <label>Secondary Button</label><br>
+        <input name='actionButtonSecondary' type='text' value=''/>
+    </p>
+
+    <p id="submissionButton">
+        <input id="submission" type='submit' value='Create Notification &raquo;'/>
+    </p>
+
+    <p id="hideButton">
+        <input id="hide" value='Close Notification'/>
+    </p>
+
+</form>
+<div id='status' style='display: none;'></div>
+
+<script type="text/javascript">
+
+    var $demoForm =  $('#nwdemo');
+
+    // Toggle between image and text notifications
+    $demoForm.find('input[name=notificationType]').change(function() {
+        if (this.value == 'image') {
+            $('#submissionButton').prepend('<p id="imageUrl"><label>Image URL</label><br>' +
+            '<input name="imageUrl" type="text" value="HTML5_sticker.png"/></p>');
+
+            $('#submissionButton').prepend('<p id="imageTitle"><label>Image Title</label><br>' +
+                '<input name="imageTitle" type="text" value="2014 Nike Free 3.0 V4 Shoes"/></p>');
+
+            $('#imageUrl').fadeIn('fast');
+            $('#imageTitle').fadeIn('fast');
+        }
+        else {
+            $('#imageUrl').fadeOut('fast');
+            $('#imageTitle').fadeOut('fast');
+        }
+    });
+
+    $demoForm.submit(function (e) {
+
+        e.preventDefault();
+        var form = $(this),
+            icon = form.find('input[name=icon]').val(),
+            title = form.find('input[name=title]').val(),
+            message = form.find('input[name=content]').val(),
+            notificationType = form.find('input[name=notificationType]:checked').val(),
+            primaryButton = form.find('input[name=actionButtonPrimary]').val(),
+            secondaryButton = form.find('input[name=actionButtonSecondary]').val(),
+            imageUrl = form.find('input[name=imageUrl]').val(),
+            imageTitle = form.find('input[name=imageTitle]').val(),
+            $status = $('#status'),
+            $hideButton = $('#hide');
+
+        var options = {
+            type: notificationType,
+            title: title,
+            message: message,
+            iconUrl: icon
+        };
+
+        // Extend image notifications with a couple extra parameters
+        if (notificationType == 'image') {
+            options.imageUrl = imageUrl;
+            options.imageTitle = imageTitle;
+        }
+
+        if (primaryButton) {
+            options.buttonPrimary = primaryButton;
+        }
+
+        if (secondaryButton) {
+            options.buttonSecondary = secondaryButton;
+        }
+
+        // Lets look at options before we send them
+        console.log(options);
+
+        window.DEA.notifications.create(options, function (target) {
+
+            console.log(target);
+
+            // Possible Events
+            switch (target) {
+                case 'closer':
+                    $hideButton.fadeOut();
+                    break;
+                case 'title':
+                    break;
+                case 'description':
+                    break;
+                case 'icons':
+                    break;
+                case 'gallery-image':
+                    break;
+                case 'gallery-image title':
+                    break;
+                case 'button primary':
+                    $hideButton.fadeOut();
+                    break;
+                case 'button secondary':
+                    $hideButton.fadeOut();
+                    break;
+                default:
+                    break;
+            }
+
+            // Print out what we clicked on in the demo app
+            $status.text('Clicked on ' + target);
+            $status.fadeIn('fast', function () {
+                setTimeout(function () {
+                    $status.fadeOut('slow');
+                }, 2000);
+            });
+        });
+
+        // show the hide button when a notification is active
+        $hideButton.fadeIn();
+
+        $hideButton.click(function() {
+            window.DEA.notifications.clear(function(wasCleared){
+                console.log('notification was cleared ', wasCleared);
+            });
+            $hideButton.fadeOut();
+        });
+
+    });
+</script>
+</body>
+</html>
